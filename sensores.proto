@@ -1,0 +1,24 @@
+syntax="proto2";
+
+message Sensor_Temperatura{
+  required string nome = 1;
+  optional float temperatura = 2;
+  
+}
+
+message Sensor_Temperatura_Geladeira{
+  
+  required string nome = 1;
+  optional float temperatura = 2;
+  optional float temperatura_freezer= 3;
+
+}
+
+message Sensor_Presenca{
+  
+  required string nome = 1;
+  optional bool tem_gente = 2;
+
+}
+
+
