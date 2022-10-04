@@ -1,24 +1,29 @@
 syntax="proto2";
 
-message Sensor_Temperatura{
-  required string nome = 1;
-  optional float temperatura = 2;
-  
+message Sensor{
+  required string tipo = 1;
+  required string id = 2;
+  optional float temperatura = 3;
+  optional float temperatura_freezer = 4;
+  optional bool presenca = 5;
+  optional string nome = 6;
+}
+message Sensor_List{
+  repeated Sensor sensores = 1;
 }
 
-message Sensor_Temperatura_Geladeira{
-  
-  required string nome = 1;
-  optional float temperatura = 2;
-  optional float temperatura_freezer= 3;
-
+message Device{
+  required string tipo = 1;
+  required string id = 2;
+  optional float temperatura = 3;
+  optional float temperatura_freezer = 4;
+  optional bool lampada = 5;
+  optional string nome = 6;
 }
 
-message Sensor_Presenca{
-  
-  required string nome = 1;
-  optional bool tem_gente = 2;
-
+message Input{
+  required string tipo = 1;
+  optional string tipo_request = 2;
+  optional string dest_id = 3;
 }
-
-
+  

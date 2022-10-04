@@ -19,30 +19,58 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   package='',
   syntax='proto2',
   serialized_options=None,
-  serialized_pb=_b('\n\x0esensores.proto\"7\n\x12Sensor_Temperatura\x12\x0c\n\x04nome\x18\x01 \x02(\t\x12\x13\n\x0btemperatura\x18\x02 \x01(\x02\"^\n\x1cSensor_Temperatura_Geladeira\x12\x0c\n\x04nome\x18\x01 \x02(\t\x12\x13\n\x0btemperatura\x18\x02 \x01(\x02\x12\x1b\n\x13temperatura_freezer\x18\x03 \x01(\x02\"2\n\x0fSensor_Presenca\x12\x0c\n\x04nome\x18\x01 \x02(\t\x12\x11\n\ttem_gente\x18\x02 \x01(\x08')
+  serialized_pb=_b('\n\x0esensores.proto\"t\n\x06Sensor\x12\x0c\n\x04tipo\x18\x01 \x02(\t\x12\n\n\x02id\x18\x02 \x02(\t\x12\x13\n\x0btemperatura\x18\x03 \x01(\x02\x12\x1b\n\x13temperatura_freezer\x18\x04 \x01(\x02\x12\x10\n\x08presenca\x18\x05 \x01(\x08\x12\x0c\n\x04nome\x18\x06 \x01(\t\"(\n\x0bSensor_List\x12\x19\n\x08sensores\x18\x01 \x03(\x0b\x32\x07.Sensor\"s\n\x06\x44\x65vice\x12\x0c\n\x04tipo\x18\x01 \x02(\t\x12\n\n\x02id\x18\x02 \x02(\t\x12\x13\n\x0btemperatura\x18\x03 \x01(\x02\x12\x1b\n\x13temperatura_freezer\x18\x04 \x01(\x02\x12\x0f\n\x07lampada\x18\x05 \x01(\x08\x12\x0c\n\x04nome\x18\x06 \x01(\t\"<\n\x05Input\x12\x0c\n\x04tipo\x18\x01 \x02(\t\x12\x14\n\x0ctipo_request\x18\x02 \x01(\t\x12\x0f\n\x07\x64\x65st_id\x18\x03 \x01(\t')
 )
 
 
 
 
-_SENSOR_TEMPERATURA = _descriptor.Descriptor(
-  name='Sensor_Temperatura',
-  full_name='Sensor_Temperatura',
+_SENSOR = _descriptor.Descriptor(
+  name='Sensor',
+  full_name='Sensor',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='nome', full_name='Sensor_Temperatura.nome', index=0,
+      name='tipo', full_name='Sensor.tipo', index=0,
       number=1, type=9, cpp_type=9, label=2,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='temperatura', full_name='Sensor_Temperatura.temperatura', index=1,
-      number=2, type=2, cpp_type=6, label=1,
+      name='id', full_name='Sensor.id', index=1,
+      number=2, type=9, cpp_type=9, label=2,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='temperatura', full_name='Sensor.temperatura', index=2,
+      number=3, type=2, cpp_type=6, label=1,
       has_default_value=False, default_value=float(0),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='temperatura_freezer', full_name='Sensor.temperatura_freezer', index=3,
+      number=4, type=2, cpp_type=6, label=1,
+      has_default_value=False, default_value=float(0),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='presenca', full_name='Sensor.presenca', index=4,
+      number=5, type=8, cpp_type=7, label=1,
+      has_default_value=False, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='nome', full_name='Sensor.nome', index=5,
+      number=6, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
@@ -59,38 +87,90 @@ _SENSOR_TEMPERATURA = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=18,
-  serialized_end=73,
+  serialized_end=134,
 )
 
 
-_SENSOR_TEMPERATURA_GELADEIRA = _descriptor.Descriptor(
-  name='Sensor_Temperatura_Geladeira',
-  full_name='Sensor_Temperatura_Geladeira',
+_SENSOR_LIST = _descriptor.Descriptor(
+  name='Sensor_List',
+  full_name='Sensor_List',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='nome', full_name='Sensor_Temperatura_Geladeira.nome', index=0,
+      name='sensores', full_name='Sensor_List.sensores', index=0,
+      number=1, type=11, cpp_type=10, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=136,
+  serialized_end=176,
+)
+
+
+_DEVICE = _descriptor.Descriptor(
+  name='Device',
+  full_name='Device',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='tipo', full_name='Device.tipo', index=0,
       number=1, type=9, cpp_type=9, label=2,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='temperatura', full_name='Sensor_Temperatura_Geladeira.temperatura', index=1,
-      number=2, type=2, cpp_type=6, label=1,
-      has_default_value=False, default_value=float(0),
+      name='id', full_name='Device.id', index=1,
+      number=2, type=9, cpp_type=9, label=2,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='temperatura_freezer', full_name='Sensor_Temperatura_Geladeira.temperatura_freezer', index=2,
+      name='temperatura', full_name='Device.temperatura', index=2,
       number=3, type=2, cpp_type=6, label=1,
       has_default_value=False, default_value=float(0),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='temperatura_freezer', full_name='Device.temperatura_freezer', index=3,
+      number=4, type=2, cpp_type=6, label=1,
+      has_default_value=False, default_value=float(0),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='lampada', full_name='Device.lampada', index=4,
+      number=5, type=8, cpp_type=7, label=1,
+      has_default_value=False, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='nome', full_name='Device.nome', index=5,
+      number=6, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
   ],
   extensions=[
   ],
@@ -103,29 +183,36 @@ _SENSOR_TEMPERATURA_GELADEIRA = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=75,
-  serialized_end=169,
+  serialized_start=178,
+  serialized_end=293,
 )
 
 
-_SENSOR_PRESENCA = _descriptor.Descriptor(
-  name='Sensor_Presenca',
-  full_name='Sensor_Presenca',
+_INPUT = _descriptor.Descriptor(
+  name='Input',
+  full_name='Input',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='nome', full_name='Sensor_Presenca.nome', index=0,
+      name='tipo', full_name='Input.tipo', index=0,
       number=1, type=9, cpp_type=9, label=2,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='tem_gente', full_name='Sensor_Presenca.tem_gente', index=1,
-      number=2, type=8, cpp_type=7, label=1,
-      has_default_value=False, default_value=False,
+      name='tipo_request', full_name='Input.tipo_request', index=1,
+      number=2, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='dest_id', full_name='Input.dest_id', index=2,
+      number=3, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
@@ -141,35 +228,44 @@ _SENSOR_PRESENCA = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=171,
-  serialized_end=221,
+  serialized_start=295,
+  serialized_end=355,
 )
 
-DESCRIPTOR.message_types_by_name['Sensor_Temperatura'] = _SENSOR_TEMPERATURA
-DESCRIPTOR.message_types_by_name['Sensor_Temperatura_Geladeira'] = _SENSOR_TEMPERATURA_GELADEIRA
-DESCRIPTOR.message_types_by_name['Sensor_Presenca'] = _SENSOR_PRESENCA
+_SENSOR_LIST.fields_by_name['sensores'].message_type = _SENSOR
+DESCRIPTOR.message_types_by_name['Sensor'] = _SENSOR
+DESCRIPTOR.message_types_by_name['Sensor_List'] = _SENSOR_LIST
+DESCRIPTOR.message_types_by_name['Device'] = _DEVICE
+DESCRIPTOR.message_types_by_name['Input'] = _INPUT
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
-Sensor_Temperatura = _reflection.GeneratedProtocolMessageType('Sensor_Temperatura', (_message.Message,), dict(
-  DESCRIPTOR = _SENSOR_TEMPERATURA,
+Sensor = _reflection.GeneratedProtocolMessageType('Sensor', (_message.Message,), dict(
+  DESCRIPTOR = _SENSOR,
   __module__ = 'sensores_pb2'
-  # @@protoc_insertion_point(class_scope:Sensor_Temperatura)
+  # @@protoc_insertion_point(class_scope:Sensor)
   ))
-_sym_db.RegisterMessage(Sensor_Temperatura)
+_sym_db.RegisterMessage(Sensor)
 
-Sensor_Temperatura_Geladeira = _reflection.GeneratedProtocolMessageType('Sensor_Temperatura_Geladeira', (_message.Message,), dict(
-  DESCRIPTOR = _SENSOR_TEMPERATURA_GELADEIRA,
+Sensor_List = _reflection.GeneratedProtocolMessageType('Sensor_List', (_message.Message,), dict(
+  DESCRIPTOR = _SENSOR_LIST,
   __module__ = 'sensores_pb2'
-  # @@protoc_insertion_point(class_scope:Sensor_Temperatura_Geladeira)
+  # @@protoc_insertion_point(class_scope:Sensor_List)
   ))
-_sym_db.RegisterMessage(Sensor_Temperatura_Geladeira)
+_sym_db.RegisterMessage(Sensor_List)
 
-Sensor_Presenca = _reflection.GeneratedProtocolMessageType('Sensor_Presenca', (_message.Message,), dict(
-  DESCRIPTOR = _SENSOR_PRESENCA,
+Device = _reflection.GeneratedProtocolMessageType('Device', (_message.Message,), dict(
+  DESCRIPTOR = _DEVICE,
   __module__ = 'sensores_pb2'
-  # @@protoc_insertion_point(class_scope:Sensor_Presenca)
+  # @@protoc_insertion_point(class_scope:Device)
   ))
-_sym_db.RegisterMessage(Sensor_Presenca)
+_sym_db.RegisterMessage(Device)
+
+Input = _reflection.GeneratedProtocolMessageType('Input', (_message.Message,), dict(
+  DESCRIPTOR = _INPUT,
+  __module__ = 'sensores_pb2'
+  # @@protoc_insertion_point(class_scope:Input)
+  ))
+_sym_db.RegisterMessage(Input)
 
 
 # @@protoc_insertion_point(module_scope)

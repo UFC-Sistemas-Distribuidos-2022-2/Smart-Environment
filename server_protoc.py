@@ -1,86 +1,121 @@
 import socket
 import threading
-from typing import Tuple
-
-# from constants import *
-# from utils_msgs import *
+from sensores_pb2 import Sensor, Input, Device , Sensor_List
+import json
 
 host = "localhost"
 port = 1510
 
 server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 server.bind((str(host), int(port)))
+sensores_list = []
+sensores_conn = {}
+sensores_status = {}
+devices = {}
 
-# clients = []
-# clients_dict = dict()
 
+def handle_client(conn: socket.socket, msg: str):
+    
+    if msg == "get":
+        print("conectei um cliente")
+        sensores_list = Sensor_List()
+        sensores_list.sensores.extend([sensores_status[key] for key in sensores_status])
+        conn.sendall(sensores_list.SerializeToString())
 
-# def distribute_msg(conn: socket.socket, msg: str):
-#     for client in clients_dict:
-#         if clients_dict[client] != conn:
-#             try:
-#                 send_msg(clients_dict[client], msg)
-#             except socket.error as e:
-#                 print("Error sending data: %s" % e)
-
-def handle_client(conn: socket.socket, addr: Tuple , msg):
-
-    # clients_dict[conn] = 
-    if msg == 'get':
-        conn.send("lista de sensores").encode("utf-8")
-        
-    while connected:
-        try:
-            msg = conn.recv(2048).decode("utf-8")
-            print(msg)
-        except Exception as e:
-            print(e)
-            connected = False
-    # del clients_dict[username]
+    elif msg == "execute":
+        sensores_conn["id"].send("execute")
+        msg = conn.recv(2048).decode("utf-8")
     conn.close()
-    
-def handle_sensor(conn: socket.socket, addr: Tuple):
 
-    # clients_dict[conn] = 
+
+def handle_sensor(conn: socket.socket, id: str):
     connected = True
-
+    nome = ""
+    if sensores_conn.get(id):
+        connected = False
+        print("ID já registrado, altere as configurações do seu aparelho")
+    else:
+        sensores_conn[id] = conn
+        print("conectei um sensor")
     while connected:
         try:
-            msg = conn.recv(2048).decode("utf-8")
-            print(msg)
+            data = conn.recv(2048)
+            if not data:
+                conn.close()
+                del sensores_conn[id]
+                print(f"Dispositivo desconectado - {nome}")
+                connected = False
+            else:
+                sensor = Sensor()
+                sensor.ParseFromString(data)
+                sensores_status[id] = sensor
+                nome = sensor.nome
+                print(f"<{sensor.id}-{sensor.nome}>:{sensor.temperatura}")
+
         except Exception as e:
             print(e)
             connected = False
-    # del clients_dict[username]
+            del sensores_conn[id]
     conn.close()
-    
-    
-def handle_device(conn: socket.socket, addr: Tuple):
 
-    # clients_dict[conn] = 
+
+def handle_device(conn: socket.socket, id: str):
     connected = True
-
+    nome = ""
+    if devices.get(id):
+        print("ID já registrado, altere as configurações do seu aparelho")
+    else:
+        devices[id] = conn
+        print("conectei um dispositivo")
     while connected:
         try:
-            msg = conn.recv(2048).decode("utf-8")
-            print(msg)
+            data = conn.recv(2048)
+            if not data:
+                conn.close()
+                del devices[id]
+                print(f"Dispositivo desconectado - {nome}")
+                connected = False
+            else:
+                device = Device()
+                device.ParseFromString(data)
+                nome = devices.nome
+                print(f"<{device.id}-{device.nome}>:{device.temperatura}")
+
         except Exception as e:
             print(e)
             connected = False
-    # del clients_dict[username]
+            del devices[id]
     conn.close()
 
 
 def start_server():
     server.listen()
-    print(f"[LISTENING] Server is listening on 1510")
-    
+    print(f"[LISTENING] Server is listening on {port}")
     while True:
-        conn, addr = server.accept()  # wait for a new connection for the server
-        msg = conn.recv(2048).decode("utf-8")
-        if msg == 'sensor':
-            thread = threading.Thread(target=handle_sensor, args=(conn, addr))
+        conn, _ = server.accept()  # wait for a new connection for the server
+        data = conn.recv(2048)
+        start_input = Input()
+        start_input.ParseFromString(data)
+
+        if start_input.tipo == "sensor":
+            thread = threading.Thread(
+                target=handle_sensor, args=(conn, start_input.dest_id)
+            )
             thread.start()
+        elif start_input.tipo == "device":
+            thread = threading.Thread(
+                target=handle_device, args=(conn, start_input.dest_id)
+            )
+            thread.start()
+            # handle_device(conn, start_input.dest_id)
+        elif start_input.tipo == "client":
+            thread = threading.Thread(
+                target=handle_client, args=(conn, start_input.tipo_request)
+            )
+            thread.start()
+        else:
+            conn.close()
+            break
         print(f"[ACTIVE CONNECTIONS] {threading.activeCount()-1}")
 
 

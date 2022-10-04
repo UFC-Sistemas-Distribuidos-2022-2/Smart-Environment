@@ -1,14 +1,8 @@
-<html>
-    <body>
-        <div>
-            <form action="/create"  method="POST" >
-                <input type='radio' name='lampada-ligada'  value="1">
-                <label>Ligado</label><br>
-                <input type='radio' name='lampada-ligada'  value="0">
-                <label>Desligado</label><br>
-                
-                <input id="txt" type="submit" name='submit' value="Enviar">
-            </form>
-        </div>
-    </body>
-</html>
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>{% block title %} Index {% endblock %}</h1>
+    <h1>Hello World!</h1>
+    <h2>Welcome to FlaskApp!</h2>
+    <h3>{{ utc_dt }}</h3>
+{% endblock %}

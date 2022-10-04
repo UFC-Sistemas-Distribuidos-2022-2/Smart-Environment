@@ -15,4 +15,4 @@ while True:
     if msg == "execute":
         ligada = not ligada
     conn.send(str(ligada)).encode("utf-8")
-    time.sleep(10)
+

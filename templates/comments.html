@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>{% block title %} Sensores{% endblock %}</h1>
+    <div style="width: 30%; margin: 10%">
+        {% for comment in comments %}
+        {% if comment.tipo=='geladeira' %}
+        <div style="padding: 10px; background-color: #EEE; margin: 5px; display:flex;justify-content: flex-start;max-width:1000px; max-height:200px;"
+        
+        >
+            <p style="font-size: 24px">Sensor {{ comment.tipo }}</p>
+            <ul>
+                
+                <li style="font-size: 20px">id={{ comment.id }}</li>
+                <li style="font-size: 20px">temperatura={{ comment.temperatura }}</li>
+                <li style="font-size: 20px">temperatura_freezer={{ comment.temperatura_freezer }}</li>
+            </ul>
+            <img src="../static/geladeira.png" alt="geladeira icon" style="height: 70px; margin:auto">
+        </div>
+        {% elif comment.tipo=='termico' %}
+        <div style="padding: 5px; background-color: #EEE; margin: 5px; display:flex;justify-content: flex-start;"
+        
+        >
+            <p style="font-size: 24px">Sensor {{ comment.tipo }}</p>
+            <ul>
+                <li style="font-size: 20px">id={{ comment.id }}</li>
+                <li style="font-size: 20px">temperatura={{ comment.temperatura }}</li>
+                
+            </ul>
+            <img src="../static/termico.png" alt="geladeira icon" style="height: 70px; margin:auto">
+        </div>
+        {% elif comment.tipo=='presenca' %}
+        <div style="padding: 5px; background-color: #EEE; margin: 5px; display:flex;justify-content: flex-start;"
+        
+        >
+            <p style="font-size: 24px">Sensor {{ comment.tipo }}</p>
+            <ul>
+                <li style="font-size: 20px">id={{ comment.id }}</li>
+                {% if comment.presenca %}
+                <li style="font-size: 20px">Há gente</li>
+                {% else %}
+                <li style="font-size: 20px">Não há gente</li>
+                {% endif %}
+            </ul>
+            <img src="../static/lampada.png" alt="geladeira icon" style="height: 70px; margin:auto">
+        </div>
+        {% endif %}
+        {% endfor %}
+    </div>
+{% endblock %}
