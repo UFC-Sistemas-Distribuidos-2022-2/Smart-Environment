@@ -44,7 +44,6 @@ def handle_sensor(conn: socket.socket, id: str):
         try:
             data = conn.recv(2048)
             if not data:
-                conn.close()
                 sensores_status.pop(id)
                 print(f"Dispositivo desconectado - {nome}")
                 connected = False
@@ -97,15 +96,13 @@ def start_server():
     server.listen()
     print(f"[LISTENING] Server is listening on {PORT}")
     while True:
-        try:
-            conn, _ = server.accept()  # wait for a new connection for the server
-            data = conn.recv(2048)
-            start_input = Input()
-            start_input.ParseFromString(data)
-            print(start_input.tipo)
-        except:
-            print("erro")
-            continue
+      
+        conn, _ = server.accept()  # wait for a new connection for the server
+        data = conn.recv(2048)
+        start_input = Input()
+        start_input.ParseFromString(data)
+        print(start_input.tipo)
+ 
         if start_input.tipo == "sensor":
             thread = threading.Thread(
                 target=handle_sensor, args=(conn, start_input.dest_id)
@@ -123,8 +120,7 @@ def start_server():
             )
             thread.start()
         else:
-            conn.close()
-            break
+            continue
         print(f"[ACTIVE CONNECTIONS] {threading.activeCount()-1}")
 
 
