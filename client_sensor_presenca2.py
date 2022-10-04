@@ -11,26 +11,22 @@ conn.connect((HOST, PORT))
 
 
 temp = random.uniform(20, 32)
-nome = "Sensor Térmico"
+nome = "Sensor Presenca"
 
 
 sensor = Sensor(
-    tipo="termico", nome=nome, id="1", temperatura=temp
+    tipo="presenca", nome=nome, id="21", presenca=False
 )
-start_input = Input(tipo="sensor", dest_id="1")
+start_input = Input(tipo="sensor", dest_id="21")
 conn.sendall(start_input.SerializeToString())
 
 
 def process_sensor(sensor: Sensor):
-
-    ruido = random.random() / 2
-    fator = random.randrange(-1, 2, 1)
-
-    sensor.temperatura = min(max(20, sensor.temperatura + fator * ruido), 32)
+    sensor.presenca = bool(random.getrandbits(1))
 
 
 while True:
     process_sensor(sensor)
-    print(sensor.temperatura)
+    print(sensor.presenca)
     conn.sendall(sensor.SerializeToString())
     time.sleep(10)

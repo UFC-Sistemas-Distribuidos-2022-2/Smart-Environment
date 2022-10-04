@@ -56,6 +56,7 @@ def handle_sensor(conn: socket.socket, id: str):
             print(e)
             connected = False
             del sensores_conn[id]
+            sensores_status.pop(id)
     conn.close()
 
 

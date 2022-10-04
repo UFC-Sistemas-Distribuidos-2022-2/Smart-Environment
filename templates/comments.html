@@ -2,7 +2,7 @@
 
 {% block content %}
     <h1>{% block title %} Sensores{% endblock %}</h1>
-    <div style="width: 30%; margin: 10%">
+    <div style="width: 50%; margin: 10%">
         {% for comment in comments %}
         {% if comment.tipo=='geladeira' %}
         <div style="padding: 10px; background-color: #EEE; margin: 5px; display:flex;justify-content: flex-start;max-width:1000px; max-height:200px;"
@@ -12,8 +12,8 @@
             <ul>
                 
                 <li style="font-size: 20px">id={{ comment.id }}</li>
-                <li style="font-size: 20px">temperatura={{ comment.temperatura }}</li>
-                <li style="font-size: 20px">temperatura_freezer={{ comment.temperatura_freezer }}</li>
+                <li style="font-size: 20px">temperatura={{ '{:.2f}'.format(comment.temperatura) }}°C</li>
+                <li style="font-size: 20px">temperatura_freezer={{ '{:.2f}'.format(comment.temperatura_freezer) }}°C</li>
             </ul>
             <img src="../static/geladeira.png" alt="geladeira icon" style="height: 70px; margin:auto">
         </div>
@@ -24,7 +24,7 @@
             <p style="font-size: 24px">Sensor {{ comment.tipo }}</p>
             <ul>
                 <li style="font-size: 20px">id={{ comment.id }}</li>
-                <li style="font-size: 20px">temperatura={{ comment.temperatura }}</li>
+                <li style="font-size: 20px">temperatura={{ '{:.2f}'.format(comment.temperatura) }}°C</li>
                 
             </ul>
             <img src="../static/termico.png" alt="geladeira icon" style="height: 70px; margin:auto">
