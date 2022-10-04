@@ -2,10 +2,8 @@ import time
 import socket
 from sensores_pb2 import Sensor, Input
 import random
+from constants import PORT, HOST
 
-
-PORT = 1510
-HOST = "localhost"
 conn = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 conn.connect((HOST, PORT))
 
@@ -28,5 +26,11 @@ def process_sensor(sensor: Sensor):
 while True:
     process_sensor(sensor)
     print(sensor.presenca)
-    conn.sendall(sensor.SerializeToString())
-    time.sleep(10)
+    try:
+        conn.sendall(sensor.SerializeToString())
+        time.sleep(10)
+    except Exception as e:
+        conn.close()
+        print(f"Deu erro aqui {e}")
+        break
+

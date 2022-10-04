@@ -1,5 +1,6 @@
 import socket
 from sensores_pb2 import Device, Input
+from constants import PORT, HOST
 
 device = Device(
     tipo="device",
@@ -9,8 +10,7 @@ device = Device(
     temperatura_freezer=100,
 )
 
-PORT = 1511
-HOST = "localhost"
+
 
 conn = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 conn.connect((HOST, PORT))

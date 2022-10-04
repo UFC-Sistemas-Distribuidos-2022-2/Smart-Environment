@@ -4,7 +4,7 @@ from sensores_pb2 import Sensor, Input, Device , Sensor_List
 import json
 
 host = "localhost"
-port = 1510
+port = 1515
 
 server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 server.bind((str(host), int(port)))
@@ -31,18 +31,18 @@ def handle_client(conn: socket.socket, msg: str):
 def handle_sensor(conn: socket.socket, id: str):
     connected = True
     nome = ""
-    if sensores_conn.get(id):
+    if sensores_status.get(id):
         connected = False
         print("ID já registrado, altere as configurações do seu aparelho")
     else:
-        sensores_conn[id] = conn
+        sensores_status[id] = Sensor()
         print("conectei um sensor")
     while connected:
         try:
             data = conn.recv(2048)
             if not data:
                 conn.close()
-                del sensores_conn[id]
+                sensores_status.pop(id)
                 print(f"Dispositivo desconectado - {nome}")
                 connected = False
             else:
@@ -93,11 +93,15 @@ def start_server():
     server.listen()
     print(f"[LISTENING] Server is listening on {port}")
     while True:
-        conn, _ = server.accept()  # wait for a new connection for the server
-        data = conn.recv(2048)
-        start_input = Input()
-        start_input.ParseFromString(data)
-
+        try:
+            conn, _ = server.accept()  # wait for a new connection for the server
+            data = conn.recv(2048)
+            start_input = Input()
+            start_input.ParseFromString(data)
+            print(start_input.tipo)
+        except:
+            print("erro")
+            continue
         if start_input.tipo == "sensor":
             thread = threading.Thread(
                 target=handle_sensor, args=(conn, start_input.dest_id)

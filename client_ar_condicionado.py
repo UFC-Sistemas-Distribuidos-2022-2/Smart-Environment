@@ -1,8 +1,7 @@
 import time
 import socket
+from constants import PORT, HOST
 
-PORT = 1510
-HOST = "localhost"
 conn = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 conn.connect((HOST, PORT))
 
