@@ -5,12 +5,12 @@ from flask import request
 from typing import List
 import socket
 import pdb
-from sensores_pb2 import Sensor, Input, Sensor_List
+from sensores_pb2 import Sensor, Input, Sensor_List , Device, Device_List
 import time
+from constants import PORT, HOST
 
 app = Flask(__name__)
-PORT = 1510
-HOST = "localhost"
+
 
 sensor = Sensor()
 sensor.tipo = "geladeira"
@@ -26,17 +26,45 @@ sensor3.tipo = "presenca"
 sensor3.presenca = True
 sensor3.id = "14"
 
+device = Device()
+device.tipo = 'lampada'
+device.id = "1"
+device.ligado = True
+device.nome = 'lampada'
+device2 = Device()
+device2.tipo = 'lampada'
+device2.id = "2"
+device2.ligado = False
+device2.nome = 'lampada 2'
+#   required string tipo = 1;
+#   required string id = 2;
+#   optional float temperatura = 3;
+#   optional float temperatura_freezer = 4;
+#   optional bool ligado = 5;
+#   optional string nome = 6;
+
 
 def get_sensores() -> List[Sensor]:
     conn = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     conn.connect((HOST, PORT))
-    start_input = Input(tipo="client", tipo_request="get")
+    start_input = Input(tipo="client", tipo_request="get", tipo_desejado="sensors")
     conn.sendall(start_input.SerializeToString())
     data = conn.recv(2048)
     sensores_list = Sensor_List()
     sensores_list.ParseFromString(data)
     return sensores_list
 
+
+def get_devices() -> List[Device]:
+    conn = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    conn.connect((HOST, PORT))
+    start_input = Input(tipo="client", tipo_request="get", tipo_desejado="devices")
+    conn.sendall(start_input.SerializeToString())
+    data = conn.recv(2048)
+    devices_list = Device_List()
+    devices_list.ParseFromString(data)
+    print(devices_list)
+    return devices_list
 
 @app.route("/")
 def index():
@@ -46,8 +74,7 @@ def index():
 @app.route("/sensores/")
 def comments():
     comments = [sensor, sensor2, sensor3]
-
-    return render_template("comments.html", comments=comments)
+    return render_template("sensors.html", sensores=comments)
 
 
 @app.route("/sensores1/")
@@ -55,8 +82,14 @@ def comments1():
     sensores = get_sensores()
     print(len(sensores.sensores))
 
-    return render_template("comments.html", comments=sensores.sensores)
+    return render_template("sensors.html", sensores=sensores.sensores)
 
+@app.route("/devices/")
+def devices():
+    devices = get_devices()
+    #print(len(devices.devices))
+
+    return render_template("devices.html", devices=devices.devices)
 
 @app.route("/create", methods=["POST"])
 def create():

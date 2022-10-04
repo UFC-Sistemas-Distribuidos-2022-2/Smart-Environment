@@ -26,11 +26,5 @@ def process_sensor(sensor: Sensor):
 while True:
     process_sensor(sensor)
     print(sensor.presenca)
-    try:
-        conn.sendall(sensor.SerializeToString())
-        time.sleep(10)
-    except Exception as e:
-        conn.close()
-        print(f"Deu erro aqui {e}")
-        break
-
+    conn.sendall(sensor.SerializeToString())
+    time.sleep(10)

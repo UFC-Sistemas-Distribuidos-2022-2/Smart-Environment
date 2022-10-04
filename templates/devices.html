@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>{% block title %} Devices{% endblock %}</h1>
+    <div style="width: 50%; margin: 10%">
+        {% for device in devices %}
+        {% if device.tipo=='lampada' %}
+        <div style="padding: 10px; background-color: #EEE; margin: 5px; display:flex;justify-content: flex-start;max-width:1000px; max-height:200px;"
+        
+        >
+            <p style="font-size: 24px">Device {{ device.tipo }}</p>
+            <ul>
+                <li style="font-size: 20px">id={{ device.id }}</li>
+                <li style="font-size: 20px">nome={{ device.nome }}</li>
+                <li style="font-size: 20px">Status lampada ={{ "Acessa" if device.ligado else "Desligado" }}</li>
+            </ul>
+            <img src="../static/light-bulb.png" alt="geladeira icon" style="height: 70px; margin:auto">
+        </div>
+        {% elif device.tipo=='geladeira' %}
+        <div style="padding: 5px; background-color: #EEE; margin: 5px; display:flex;justify-content: flex-start;"
+        
+        >
+            <p style="font-size: 24px">Device {{ device.tipo }}</p>
+            <ul>
+                <li style="font-size: 20px">id={{ device.id }}</li>
+                <li style="font-size: 20px">nome={{ device.nome }}</li>
+                {% if device.ligado==True %}
+                <li style="font-size: 20px">temperatura={{ '{:.2f}'.format(device.temperatura) }}°C</li>
+                <li style="font-size: 20px">temperatura freezer={{ '{:.2f}'.format(device.temperatura_freezer) }}°C</li>
+                {% endif %}
+                <li style="font-size: 20px">Status geladeira ={{ "Ligado" if device.ligado else "Desligado" }}</li>
+                
+            </ul>
+            <img src="../static/geladeira-device.png" alt="geladeira icon" style="height: 70px; margin:auto">
+        </div>
+        {% elif device.tipo=='ar_condicionado' %}
+        <div style="padding: 5px; background-color: #EEE; margin: 5px; display:flex;justify-content: flex-start;"
+        
+        >
+            <p style="font-size: 24px">Device {{ device.tipo }}</p>
+            <ul>
+                <li style="font-size: 20px">id={{ device.id }}</li>
+                <li style="font-size: 20px">nome={{ device.nome }}</li>
+                {% if device.ligado==True %}
+                <li style="font-size: 20px">temperatura={{ '{:.2f}'.format(device.temperatura) }}°C</li>
+                {% endif %}
+                <li style="font-size: 20px">Status Ar condicionado ={{ "Ligado" if device.ligado else "Desligado" }}</li>
+            </ul>
+            <img src="../static/lampada.png" alt="geladeira icon" style="height: 70px; margin:auto">
+        </div>
+        {% endif %}
+        {% endfor %}
+    </div>
+{% endblock %}

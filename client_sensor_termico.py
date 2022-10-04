@@ -21,7 +21,7 @@ conn.sendall(start_input.SerializeToString())
 
 def process_sensor(sensor: Sensor):
 
-    ruido = random.random() / 2
+    ruido = random.random()
     fator = random.randrange(-1, 2, 1)
 
     sensor.temperatura = min(max(20, sensor.temperatura + fator * ruido), 32)

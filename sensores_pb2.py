@@ -19,7 +19,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   package='',
   syntax='proto2',
   serialized_options=None,
-  serialized_pb=_b('\n\x0esensores.proto\"t\n\x06Sensor\x12\x0c\n\x04tipo\x18\x01 \x02(\t\x12\n\n\x02id\x18\x02 \x02(\t\x12\x13\n\x0btemperatura\x18\x03 \x01(\x02\x12\x1b\n\x13temperatura_freezer\x18\x04 \x01(\x02\x12\x10\n\x08presenca\x18\x05 \x01(\x08\x12\x0c\n\x04nome\x18\x06 \x01(\t\"(\n\x0bSensor_List\x12\x19\n\x08sensores\x18\x01 \x03(\x0b\x32\x07.Sensor\"s\n\x06\x44\x65vice\x12\x0c\n\x04tipo\x18\x01 \x02(\t\x12\n\n\x02id\x18\x02 \x02(\t\x12\x13\n\x0btemperatura\x18\x03 \x01(\x02\x12\x1b\n\x13temperatura_freezer\x18\x04 \x01(\x02\x12\x0f\n\x07lampada\x18\x05 \x01(\x08\x12\x0c\n\x04nome\x18\x06 \x01(\t\"<\n\x05Input\x12\x0c\n\x04tipo\x18\x01 \x02(\t\x12\x14\n\x0ctipo_request\x18\x02 \x01(\t\x12\x0f\n\x07\x64\x65st_id\x18\x03 \x01(\t')
+  serialized_pb=_b('\n\x0esensores.proto\"t\n\x06Sensor\x12\x0c\n\x04tipo\x18\x01 \x02(\t\x12\n\n\x02id\x18\x02 \x02(\t\x12\x13\n\x0btemperatura\x18\x03 \x01(\x02\x12\x1b\n\x13temperatura_freezer\x18\x04 \x01(\x02\x12\x10\n\x08presenca\x18\x05 \x01(\x08\x12\x0c\n\x04nome\x18\x06 \x01(\t\"(\n\x0bSensor_List\x12\x19\n\x08sensores\x18\x01 \x03(\x0b\x32\x07.Sensor\"\'\n\x0b\x44\x65vice_List\x12\x18\n\x07\x64\x65vices\x18\x01 \x03(\x0b\x32\x07.Device\"r\n\x06\x44\x65vice\x12\x0c\n\x04tipo\x18\x01 \x02(\t\x12\n\n\x02id\x18\x02 \x02(\t\x12\x13\n\x0btemperatura\x18\x03 \x01(\x02\x12\x1b\n\x13temperatura_freezer\x18\x04 \x01(\x02\x12\x0e\n\x06ligado\x18\x05 \x01(\x08\x12\x0c\n\x04nome\x18\x06 \x01(\t\"S\n\x05Input\x12\x0c\n\x04tipo\x18\x01 \x02(\t\x12\x14\n\x0ctipo_request\x18\x02 \x01(\t\x12\x0f\n\x07\x64\x65st_id\x18\x03 \x01(\t\x12\x15\n\rtipo_desejado\x18\x04 \x01(\t')
 )
 
 
@@ -122,6 +122,37 @@ _SENSOR_LIST = _descriptor.Descriptor(
 )
 
 
+_DEVICE_LIST = _descriptor.Descriptor(
+  name='Device_List',
+  full_name='Device_List',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='devices', full_name='Device_List.devices', index=0,
+      number=1, type=11, cpp_type=10, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=178,
+  serialized_end=217,
+)
+
+
 _DEVICE = _descriptor.Descriptor(
   name='Device',
   full_name='Device',
@@ -158,7 +189,7 @@ _DEVICE = _descriptor.Descriptor(
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='lampada', full_name='Device.lampada', index=4,
+      name='ligado', full_name='Device.ligado', index=4,
       number=5, type=8, cpp_type=7, label=1,
       has_default_value=False, default_value=False,
       message_type=None, enum_type=None, containing_type=None,
@@ -183,8 +214,8 @@ _DEVICE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=178,
-  serialized_end=293,
+  serialized_start=219,
+  serialized_end=333,
 )
 
 
@@ -216,6 +247,13 @@ _INPUT = _descriptor.Descriptor(
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='tipo_desejado', full_name='Input.tipo_desejado', index=3,
+      number=4, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
   ],
   extensions=[
   ],
@@ -228,13 +266,15 @@ _INPUT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=295,
-  serialized_end=355,
+  serialized_start=335,
+  serialized_end=418,
 )
 
 _SENSOR_LIST.fields_by_name['sensores'].message_type = _SENSOR
+_DEVICE_LIST.fields_by_name['devices'].message_type = _DEVICE
 DESCRIPTOR.message_types_by_name['Sensor'] = _SENSOR
 DESCRIPTOR.message_types_by_name['Sensor_List'] = _SENSOR_LIST
+DESCRIPTOR.message_types_by_name['Device_List'] = _DEVICE_LIST
 DESCRIPTOR.message_types_by_name['Device'] = _DEVICE
 DESCRIPTOR.message_types_by_name['Input'] = _INPUT
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
@@ -252,6 +292,13 @@ Sensor_List = _reflection.GeneratedProtocolMessageType('Sensor_List', (_message.
   # @@protoc_insertion_point(class_scope:Sensor_List)
   ))
 _sym_db.RegisterMessage(Sensor_List)
+
+Device_List = _reflection.GeneratedProtocolMessageType('Device_List', (_message.Message,), dict(
+  DESCRIPTOR = _DEVICE_LIST,
+  __module__ = 'sensores_pb2'
+  # @@protoc_insertion_point(class_scope:Device_List)
+  ))
+_sym_db.RegisterMessage(Device_List)
 
 Device = _reflection.GeneratedProtocolMessageType('Device', (_message.Message,), dict(
   DESCRIPTOR = _DEVICE,

@@ -12,12 +12,16 @@ message Sensor_List{
   repeated Sensor sensores = 1;
 }
 
+message Device_List{
+  repeated Device devices = 1;
+}
+
 message Device{
   required string tipo = 1;
   required string id = 2;
   optional float temperatura = 3;
   optional float temperatura_freezer = 4;
-  optional bool lampada = 5;
+  optional bool ligado = 5;
   optional string nome = 6;
 }
 
@@ -25,5 +29,6 @@ message Input{
   required string tipo = 1;
   optional string tipo_request = 2;
   optional string dest_id = 3;
+  optional string tipo_desejado = 4;
 }
   

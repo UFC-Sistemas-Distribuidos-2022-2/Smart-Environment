@@ -3,40 +3,41 @@
 {% block content %}
     <h1>{% block title %} Sensores{% endblock %}</h1>
     <div style="width: 50%; margin: 10%">
-        {% for comment in comments %}
-        {% if comment.tipo=='geladeira' %}
+        {% for sensor in sensores %}
+        {% if sensor.tipo=='geladeira' %}
         <div style="padding: 10px; background-color: #EEE; margin: 5px; display:flex;justify-content: flex-start;max-width:1000px; max-height:200px;"
         
         >
-            <p style="font-size: 24px">Sensor {{ comment.tipo }}</p>
+            <p style="font-size: 24px">Device {{ sensor.tipo }}</p>
             <ul>
                 
-                <li style="font-size: 20px">id={{ comment.id }}</li>
-                <li style="font-size: 20px">temperatura={{ '{:.2f}'.format(comment.temperatura) }}°C</li>
-                <li style="font-size: 20px">temperatura_freezer={{ '{:.2f}'.format(comment.temperatura_freezer) }}°C</li>
+                <li style="font-size: 20px">id={{ sensor.id }}</li>
+                <li style="font-size: 20px">nome={{ sensor.nome }}</li>
+                <li style="font-size: 20px">temperatura={{ '{:.2f}'.format(sensor.temperatura) }}°C</li>
+                <li style="font-size: 20px">temperatura_freezer={{ '{:.2f}'.format(sensor.temperatura_freezer) }}°C</li>
             </ul>
             <img src="../static/geladeira.png" alt="geladeira icon" style="height: 70px; margin:auto">
         </div>
-        {% elif comment.tipo=='termico' %}
+        {% elif sensor.tipo=='termico' %}
         <div style="padding: 5px; background-color: #EEE; margin: 5px; display:flex;justify-content: flex-start;"
         
         >
-            <p style="font-size: 24px">Sensor {{ comment.tipo }}</p>
+            <p style="font-size: 24px">Sensor {{ sensor.tipo }}</p>
             <ul>
-                <li style="font-size: 20px">id={{ comment.id }}</li>
-                <li style="font-size: 20px">temperatura={{ '{:.2f}'.format(comment.temperatura) }}°C</li>
+                <li style="font-size: 20px">id={{ sensor.id }}</li>
+                <li style="font-size: 20px">temperatura={{ '{:.2f}'.format(sensor.temperatura) }}°C</li>
                 
             </ul>
             <img src="../static/termico.png" alt="geladeira icon" style="height: 70px; margin:auto">
         </div>
-        {% elif comment.tipo=='presenca' %}
+        {% elif sensor.tipo=='presenca' %}
         <div style="padding: 5px; background-color: #EEE; margin: 5px; display:flex;justify-content: flex-start;"
         
         >
-            <p style="font-size: 24px">Sensor {{ comment.tipo }}</p>
+            <p style="font-size: 24px">Sensor {{ sensor.tipo }}</p>
             <ul>
-                <li style="font-size: 20px">id={{ comment.id }}</li>
-                {% if comment.presenca %}
+                <li style="font-size: 20px">id={{ sensor.id }}</li>
+                {% if sensor.presenca %}
                 <li style="font-size: 20px">Há gente</li>
                 {% else %}
                 <li style="font-size: 20px">Não há gente</li>
