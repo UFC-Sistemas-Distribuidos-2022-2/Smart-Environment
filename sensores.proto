@@ -30,5 +30,7 @@ message Input{
   optional string tipo_request = 2;
   optional string dest_id = 3;
   optional string tipo_desejado = 4;
+  optional bool ligado = 5;
+  optional float temperatura = 6;
 }
   

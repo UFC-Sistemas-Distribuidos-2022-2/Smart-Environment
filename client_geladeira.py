@@ -1,8 +1,8 @@
 import socket
 from sensores_pb2 import Device, Input
 from constants import PORT, HOST
-from signal import signal, SIGPIPE, SIG_DFL
-signal(SIGPIPE, SIG_DFL)
+import time
+
 
 device = Device(
     tipo="geladeira",
@@ -18,11 +18,15 @@ conn.connect((HOST, PORT))
 
 start_input = Input(tipo="device", dest_id='101')
 conn.sendall(start_input.SerializeToString())
-temp = 0
+time.sleep(1)
 conn.sendall(device.SerializeToString())
 while True:
-    msg = conn.recv(2048).decode("utf-8")
-    if msg == "execute":
+    data = conn.recv(2048)
+    input = Input()
+    input.ParseFromString(data)
+    print(input)
+    if input.tipo_request == "post":
         device.temperatura = 5
         device.temperatura_freezer = -20
+        device.ligado = input.ligado
     conn.sendall(device.SerializeToString())

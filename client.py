@@ -8,9 +8,10 @@ import pdb
 from sensores_pb2 import Sensor, Input, Sensor_List , Device, Device_List
 import time
 from constants import PORT, HOST
+from flask_cors import CORS
 
 app = Flask(__name__)
-
+CORS(app)
 
 sensor = Sensor()
 sensor.tipo = "geladeira"
@@ -66,6 +67,13 @@ def get_devices() -> List[Device]:
     print(devices_list)
     return devices_list
 
+
+def update_device(input: Input) -> None:
+    conn = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    conn.connect((HOST, PORT))
+    conn.sendall(input.SerializeToString())
+
+
 @app.route("/")
 def index():
     return render_template("index.html")
@@ -84,31 +92,32 @@ def comments1():
 
     return render_template("sensors.html", sensores=sensores.sensores)
 
+
 @app.route("/devices/")
 def devices():
     devices = get_devices()
-    #print(len(devices.devices))
-
     return render_template("devices.html", devices=devices.devices)
 
-@app.route("/create", methods=["POST"])
-def create():
-    ligada = request.form.get("lampada-ligada")
-    # tmp = request.form.get('ar')
-    print(ligada)
-    # print(tmp)
-    server_lampada(ligada)
-    teste = Sensor()
-    teste.nome = "lampada"
-    teste.status_lampada = int(ligada)
-    PORT = 1510
-    HOST = "localhost"
-    s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    s.connect((HOST, PORT))
-    s.sendall(teste.SerializeToString())
-    # server_ar(tmp)
-    return render_template("index.html")
 
+@app.route("/devices/<tipo>/<id>")
+def lampada(tipo, id):
+    return render_template("welcome.html", tipo=tipo, id=id)
+
+
+@app.route("/update/<tipo>/<id>", methods=['GET', 'POST'])
+def update(tipo, id):
+    input = Input()
+    if tipo == "ar_condicionado" and request.form.get('ar-condicionado-temperatura') is not '':
+        input.temperatura = float(request.form.get('ar-condicionado-temperatura'))
+    print(request.form.get('ligado'))
+    input.ligado = bool(int(request.form.get('ligado')))
+    print(input.ligado)
+    input.dest_id = str(int(id))
+    input.tipo = "client"
+    input.tipo_request = 'post'
+    update_device(input)
+    # devices = get_devices()
+    return render_template("index.html")
 
 def server_lampada(ligada):
     teste = Sensor()
@@ -122,4 +131,4 @@ def server_lampada(ligada):
 
 
 if __name__ == "__main__":
-    app.run(port=8011, debug=True)
+    app.run(port=8012, debug=True)

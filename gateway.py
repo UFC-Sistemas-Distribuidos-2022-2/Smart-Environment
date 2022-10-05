@@ -8,26 +8,30 @@ signal(SIGPIPE, SIG_DFL)
 server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 server.bind((str(HOST), int(PORT)))
 sensores_list = []
-sensores_conn = {}
 sensores_status = {}
 devices_status = {}
+devices_conn = {}
 
 
-def handle_client(conn: socket.socket, msg: str, tipo=None):
-    if msg == "get":
-        if tipo =="sensors":
+def handle_client(conn: socket.socket, input: Input):
+    if input.tipo_request == "get":
+        if input.tipo_desejado == "sensors":
             print("conectei um cliente")
             sensores_list = Sensor_List()
             sensores_list.sensores.extend([sensores_status[key] for key in sensores_status])
             conn.sendall(sensores_list.SerializeToString())
-        elif tipo =="devices":
+        elif input.tipo_desejado == "devices":
             print("conectei um cliente")
             devices_list = Device_List()
             devices_list.devices.extend([devices_status[key] for key in devices_status])
             conn.sendall(devices_list.SerializeToString())
-    elif msg == "execute":
-        sensores_conn["id"].send("execute")
-        msg = conn.recv(2048).decode("utf-8")
+    elif input.tipo_request == "post":
+        print(input)
+        if devices_conn.get(input.dest_id):
+            devices_conn[input.dest_id].sendall(input.SerializeToString())
+            print("sim")
+        print("oi")
+
     conn.close()
 
 
@@ -57,18 +61,19 @@ def handle_sensor(conn: socket.socket, id: str):
         except Exception as e:
             print(e)
             connected = False
-            del sensores_conn[id]
             sensores_status.pop(id)
     conn.close()
 
 
 def handle_device(conn: socket.socket, id: str):
+    print("device na thread")
     connected = True
     nome = ""
     if devices_status.get(id):
         print("ID já registrado, altere as configurações do seu aparelho")
     else:
         devices_status[id] = Device()
+        devices_conn[id] = conn
         print("conectei um dispositivo")
     while connected:
         try:
@@ -79,6 +84,7 @@ def handle_device(conn: socket.socket, id: str):
                 print(f"Dispositivo desconectado - {nome}")
                 connected = False
             else:
+                print("hi")
                 device = Device()
                 device.ParseFromString(data)
                 devices_status[id] = device
@@ -116,7 +122,7 @@ def start_server():
             # handle_device(conn, start_input.dest_id)
         elif start_input.tipo == "client":
             thread = threading.Thread(
-                target=handle_client, args=(conn, start_input.tipo_request, start_input.tipo_desejado)
+                target=handle_client, args=(conn, start_input)
             )
             thread.start()
         else:

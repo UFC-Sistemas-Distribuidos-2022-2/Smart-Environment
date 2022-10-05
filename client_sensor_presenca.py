@@ -17,6 +17,7 @@ sensor = Sensor(
 )
 start_input = Input(tipo="sensor", dest_id="15")
 conn.sendall(start_input.SerializeToString())
+time.sleep(1)
 
 
 def process_sensor(sensor: Sensor):

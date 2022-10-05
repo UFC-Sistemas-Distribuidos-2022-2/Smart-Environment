@@ -43,8 +43,11 @@
                 <li style="font-size: 20px">Não há gente</li>
                 {% endif %}
             </ul>
-            <img src="../static/lampada.png" alt="geladeira icon" style="height: 70px; margin:auto">
-        </div>
+            {% if sensor.presenca %}
+            <img src="../static/light-bulb.png" alt="lampada icon" style="height: 70px; margin:auto">
+            {% else %}
+            <img src="../static/light-bulb-off.png" alt="lampada icon" style="height: 70px; margin:auto">
+            {% endif %}        </div>
         {% endif %}
         {% endfor %}
     </div>

@@ -19,7 +19,12 @@
                         <li style="font-size: 20px">nome={{ device.nome }}</li>
                         <li style="font-size: 20px">Status lampada ={{ "Acessa" if device.ligado else "Desligado" }}</li>
                     </ul>
-                    <img src="../static/light-bulb.png" alt="geladeira icon" style="height: 70px; margin:auto">
+                    {% if device.ligado %}
+                    <img src="../static/light-bulb.png" alt="lampada icon" style="height: 70px; margin:auto">
+                    {% else %}
+                    <img src="../static/light-bulb-off.png" alt="lampada icon" style="height: 70px; margin:auto">
+                    {% endif %}
+
         </div>
     </a>
         {% elif device.tipo=='geladeira' %}
@@ -37,7 +42,11 @@
                 <li style="font-size: 20px">Status geladeira ={{ "Ligado" if device.ligado else "Desligado" }}</li>
                 
             </ul>
-            <img src="../static/geladeira-device.png" alt="geladeira icon" style="height: 70px; margin:auto">
+            {% if device.ligado %}
+            <img src="../static/geladeira.png" alt="lampada icon" style="height: 70px; margin:auto">
+            {% else %}
+            <img src="../static/geladeira-off.png" alt="lampada icon" style="height: 70px; margin:auto">
+            {% endif %}
         </div></a>
         {% elif device.tipo=='ar_condicionado' %}
         <a href="/devices/{{device.tipo}}/{{device.id}}" style="color: inherit;text-decoration: none;"><div style="padding: 5px; background-color: #EEE; margin: 5px; display:flex;justify-content: flex-start;"
@@ -52,8 +61,12 @@
                 {% endif %}
                 <li style="font-size: 20px">Status Ar condicionado ={{ "Ligado" if device.ligado else "Desligado" }}</li>
             </ul>
-            <img src="../static/lampada.png" alt="geladeira icon" style="height: 70px; margin:auto">
-        </div></a>
+            {% if device.ligado %}
+            <img src="../static/ar-condicionado.png" alt="lampada icon" style="height: 70px; margin:auto">
+            {% else %}
+            <img src="../static/ar-condicionado-off.png" alt="lampada icon" style="height: 70px; margin:auto">
+            {% endif %}
+        </div>
         {% endif %}
         {% endfor %}
     </div>
