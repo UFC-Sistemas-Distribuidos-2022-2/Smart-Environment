@@ -1,22 +1,38 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <h1>{% block title %} Index {% endblock %}</h1>
-    <h1>Hello World!</h1>
-    <h2>Welcome to FlaskApp!</h2>
-    <h3>{{ id }}</h3>
-    <form action="/update/{{tipo}}/{{id}}"  method="POST" >
-        
-        <input type='radio' name='ligado' checked  value="1">
-        <label>Ligado</label><br>
-        <input type='radio' name='ligado'  value="0">
-        <label>Desligado</label><br>
-        
+
+<div style="background-color: #EEE;
+     padding: 15px 0 ;
+     display: flex;
+     justify-content: center;
+     width: 30%;
+     margin:auto;
+     border-width: thin;
+     border-style:solid">
+    <form action="/update/{{tipo}}/{{id}}" method="POST">
+        <div>
+            <input type='radio' name='ligado' checked value="1">
+            <label>Ligado</label><br>
+            <input type='radio' name='ligado' value="0">
+            <label>Desligado</label><br>
+        </div>
+
         {% if tipo =='ar_condicionado' %}
-        <label>temperatura</label>
-        <input type="number" id="textsend" name="ar-condicionado-temperatura" min="16" max="25">
+        <div>
+            <label>temperatura</label>
+            <input type="number" id="textsend" name="ar-condicionado-temperatura" min="16" max="25">
+        </div>
         {% endif %}
-        <input id="txt" type="submit" name='submit' id="submit" value="Enviar">
-    </form>
+        <div><input style="  background-color: #6936ba;
+            border: none;
+            border-radius: 10px;
+            color: white;
+            padding: 12px 20px;
+            text-decoration: none;
+            margin: 4px 2px;
+            cursor: pointer;" id="txt" type="submit" name='submit' id="submit" value="Enviar"></div>
+</div>
+</form>
 
 {% endblock %}
