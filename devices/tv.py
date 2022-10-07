@@ -23,10 +23,10 @@ def get_server() -> Tuple[str, int]:
 
 
 device = Device(
-    tipo="ar_condicionado",
-    nome="brastemp-4000",
+    tipo="tv",
+    nome="samsumg-32",
     id=str(random.randrange(500)),
-    temperatura=18,
+    temperatura=0,
     ligado=False
 )
 
@@ -44,9 +44,9 @@ def start_client():
     while True:
         data = conn.recv(2048)
         input = Input()
-        input.ParseFromString(data)      
+        input.ParseFromString(data)
         if input.tipo_request == "post":
-            device.temperatura = max(input.temperatura, 16)
+            device.temperatura = input.temperatura
             device.ligado = input.ligado
         conn.sendall(device.SerializeToString())
 

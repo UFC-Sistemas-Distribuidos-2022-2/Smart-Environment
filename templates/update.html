@@ -21,7 +21,12 @@
         {% if tipo =='ar_condicionado' %}
         <div>
             <label>temperatura</label>
-            <input type="number" id="textsend" name="ar-condicionado-temperatura" min="16" max="25">
+            <input type="number" id="textsend" name="device_value" min="16" max="25">
+        </div>
+        {% elif tipo =='tv' %}
+        <div>
+            <label>canal</label>
+            <input type="number" id="textsend" name="device_value" min="0" max="500">
         </div>
         {% endif %}
         <div><input style="  background-color: #6936ba;

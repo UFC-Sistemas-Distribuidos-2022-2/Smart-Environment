@@ -60,7 +60,26 @@
             <img src="../static/ar-condicionado-off.png" alt="lampada icon" class="img-icon">
             {% endif %}
         </div>
-        {% endif %}
-        {% endfor %}
+        {% elif device.tipo=='tv' %}
+        <a href="/devices/{{device.tipo}}/{{device.id}}" style="color: inherit;text-decoration: none;">
+            <div class="div-template">
+                <p style="font-size: 24px">Device {{ device.tipo }}</p>
+                <ul>
+                    <li>id={{ device.id }}</li>
+                    <li>nome={{ device.nome }}</li>
+                    {% if device.ligado==True %}
+                    <li>Canal={{ '{:.0f}'.format(device.temperatura) }}</li>
+                    {% endif %}
+                    <li>Status TV ={{ "Ligado" if device.ligado else "Desligado" }}</li>
+                </ul>
+                {% if device.ligado %}
+                <img src="../static/tv-on.png" alt="lampada icon" class="img-icon">
+                {% else %}
+                <img src="../static/tv-off.png" alt="lampada icon" class="img-icon">
+                {% endif %}
+            </div>
+
+            {% endif %}
+            {% endfor %}
 </div>
 {% endblock %}

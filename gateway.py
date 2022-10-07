@@ -1,6 +1,7 @@
 import socket
 import threading
 from proto.sensores_pb2 import Sensor, Input, Device, Sensor_List, Device_List
+import time
 from constants import PORT, HOST, MCAST_GRP, MCAST_PORT
 from signal import signal, SIGPIPE, SIG_DFL
 signal(SIGPIPE, SIG_DFL)
@@ -22,6 +23,7 @@ def handle_connections():
             sock.setsockopt(socket.IPPROTO_IP, socket.IP_MULTICAST_TTL, TTL)
             sock.sendto(SERVER_ADDR.encode(), (MCAST_GRP, MCAST_PORT))
             sock.close()
+            time.sleep(0.5)
         except Exception as e:
             print(e)
             pass
@@ -132,7 +134,6 @@ def start_server():
                 target=handle_device, args=(conn, start_input.dest_id)
             )
             thread.start()
-            # handle_device(conn, start_input.dest_id)
         elif start_input.tipo == "client":
             thread = threading.Thread(
                 target=handle_client, args=(conn, start_input)

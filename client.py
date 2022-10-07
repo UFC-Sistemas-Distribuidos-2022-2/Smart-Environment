@@ -3,10 +3,10 @@ from typing import List
 import socket
 from proto.sensores_pb2 import Sensor, Input, Sensor_List, Device, Device_List
 from constants import PORT, HOST
-from flask_cors import CORS
+
 
 app = Flask(__name__)
-CORS(app)
+
 
 
 def get_sensores() -> List[Sensor]:
@@ -65,8 +65,8 @@ def lampada(tipo, id):
 @app.route("/update/<tipo>/<id>", methods=['GET', 'POST'])
 def update(tipo, id):
     input = Input()
-    if tipo == "ar_condicionado" and request.form.get('ar-condicionado-temperatura') is not '':
-        input.temperatura = float(request.form.get('ar-condicionado-temperatura'))
+    if tipo in ["ar_condicionado","tv"] and request.form.get('device_value') is not '':
+        input.temperatura = float(request.form.get('device_value'))
     print(request.form.get('ligado'))
     input.ligado = bool(int(request.form.get('ligado')))
     print(input.ligado)
