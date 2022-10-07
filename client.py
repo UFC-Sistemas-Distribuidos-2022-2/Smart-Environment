@@ -44,7 +44,7 @@ def index():
 
 
 @app.route("/sensores/")
-def comments1():
+def sensores():
     sensores = get_sensores()
     print(len(sensores.sensores))
 

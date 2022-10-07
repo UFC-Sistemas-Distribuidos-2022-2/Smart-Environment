@@ -122,7 +122,6 @@ def start_server():
         data = conn.recv(2048)
         start_input = Input()
         start_input.ParseFromString(data)
-        print(start_input.tipo)
 
         if start_input.tipo == "sensor":
             thread = threading.Thread(
