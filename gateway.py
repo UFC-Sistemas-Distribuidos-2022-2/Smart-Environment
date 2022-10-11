@@ -143,5 +143,5 @@ def start_server():
 
 
 if __name__ == "__main__":
-    print("[STARTING] Client is starting...")
+    print("[STARTING] Server is starting...")
     start_server()

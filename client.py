@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect
 from typing import List
 import socket
 from proto.sensores_pb2 import Sensor, Input, Sensor_List, Device, Device_List
@@ -74,7 +74,7 @@ def update(tipo, id):
     input.tipo = "client"
     input.tipo_request = 'post'
     update_device(input)
-    return render_template("index.html")
+    return redirect('/devices')
 
 
 if __name__ == "__main__":

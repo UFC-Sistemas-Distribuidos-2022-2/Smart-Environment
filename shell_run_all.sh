@@ -1,0 +1,5 @@
+gnome-terminal -e "python3 client.py"
+gnome-terminal -e "python3 -m gateway"
+gnome-terminal -e "python3 -m devices.geladeira"
+gnome-terminal -e "python3 -m devices.lampada"
+gnome-terminal -e "python3 -m devices.ar_condicionado"
