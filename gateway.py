@@ -3,8 +3,12 @@ import threading
 from proto.sensores_pb2 import Sensor, Input, Device, Sensor_List, Device_List
 import time
 from constants import PORT, HOST, MCAST_GRP, MCAST_PORT
-from signal import signal, SIGPIPE, SIG_DFL
-signal(SIGPIPE, SIG_DFL)
+
+try:
+    from signal import signal, SIGPIPE, SIG_DFL
+    signal(SIGPIPE, SIG_DFL)
+except ImportError:  # If SIGPIPE is not available (win32),
+    pass
 
 server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 server.bind((str(HOST), int(PORT)))
