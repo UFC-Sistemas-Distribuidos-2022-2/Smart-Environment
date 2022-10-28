@@ -1,10 +1,14 @@
 import socket
 import threading
-from proto.sensores_pb2 import Sensor, Input, Device, Sensor_List, Device_List
+from proto.grpc.sensores_pb2 import Sensor, Input, Device, Sensor_List, Device_List
 import pika
 from constants import PORT, HOST
 from signal import signal, SIGPIPE, SIG_DFL
 import copy
+import logging
+import grpc
+from proto.grpc import sensores_pb2
+from proto.grpc import sensores_pb2_grpc
 signal(SIGPIPE, SIG_DFL)
 
 server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -52,9 +56,7 @@ def handle_client(conn: socket.socket, input: Input):
             conn.sendall(devices_list.SerializeToString())
             print("[200] POST OK")
     elif input.tipo_request == "post":
-        if devices_conn.get(input.dest_id):
-            devices_conn[input.dest_id].sendall(input.SerializeToString())
-            print("[200] POST OK")
+        update_device(input)
 
     conn.close()
 
@@ -89,34 +91,23 @@ def handle_sensor(conn: socket.socket, id: str):
     conn.close()
 
 
-def handle_device(conn: socket.socket, id: str):
-    connected = True
+def handle_device():
+    print("Will try to greet world ...")
+    with grpc.insecure_channel('localhost:50051') as channel:
+        stub = sensores_pb2_grpc.RouteDeviceStub(channel)
+        device = stub.GetDevice(sensores_pb2.Input(tipo='device', tipo_request='get'))
+    devices_status[device.id] = device
+    devices_conn[device.id] = 'localhost:50051'
 
-    if devices_status.get(id):
-        connected = False
-        print("ID já registrado, altere as configurações do seu aparelho")
-    else:
-        devices_status[id] = Device()
-        devices_conn[id] = conn
-        print("<>Conected to a Device<>")
-    while connected:
-        try:
-            data = conn.recv(2048)
-            if not data:
-                conn.close()
-                devices_status.pop(id)
-                connected = False
-            else:
-                device = Device()
-                device.ParseFromString(data)
-                devices_status[id] = device
-                print(f"<{device.id}-{device.nome}>: new update")
 
-        except Exception as e:
-            print(e)
-            connected = False
-            devices_status.pop(id)
-    conn.close()
+def update_device(input):
+    print("Will try to greet world ...")
+    with grpc.insecure_channel('localhost:50051') as channel:
+        stub = sensores_pb2_grpc.RouteDeviceStub(channel)
+        device = stub.UpdateDevice(input)
+    devices_status[device.id] = device
+
+
 
 
 def start_server():
@@ -124,7 +115,9 @@ def start_server():
         target=handle_1
     )
     thread.start()
+    handle_device()
     server.listen()
+    print(devices_status)
     print(f"[LISTENING] Server is listening on {PORT}")
     while True:
         conn, _ = server.accept()  # wait for a new connection for the server

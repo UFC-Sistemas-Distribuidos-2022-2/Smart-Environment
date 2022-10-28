@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request, redirect
 from typing import List
 import socket
-from proto.sensores_pb2 import Sensor, Input, Sensor_List, Device, Device_List
+from proto.grpc.sensores_pb2 import Sensor, Input, Sensor_List, Device, Device_List
 from constants import PORT, HOST
 
 

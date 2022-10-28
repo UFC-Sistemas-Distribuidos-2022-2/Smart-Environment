@@ -1,5 +1,11 @@
 syntax="proto2";
 
+service RouteDevice {
+  rpc GetDevice(Input) returns (Device) {}
+  
+  rpc UpdateDevice(Input) returns (Device) {}
+}
+
 message Sensor{
   required string tipo = 1;
   required string id = 2;
