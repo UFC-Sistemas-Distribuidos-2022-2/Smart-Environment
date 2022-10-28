@@ -1,14 +1,11 @@
 import socket
 import threading
 from proto.sensores_pb2 import Sensor, Input, Device, Sensor_List, Device_List
-import time
-from constants import PORT, HOST, MCAST_GRP, MCAST_PORT
-
-try:
-    from signal import signal, SIGPIPE, SIG_DFL
-    signal(SIGPIPE, SIG_DFL)
-except ImportError:  # If SIGPIPE is not available (win32),
-    pass
+import pika
+from constants import PORT, HOST
+from signal import signal, SIGPIPE, SIG_DFL
+import copy
+signal(SIGPIPE, SIG_DFL)
 
 server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 server.bind((str(HOST), int(PORT)))
@@ -19,19 +16,27 @@ devices_conn = {}
 SERVER_ADDR = HOST+':'+str(PORT)
 
 
-def handle_connections():
-    while True:
-        try:
-            TTL = 2
-            sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM, socket.IPPROTO_UDP)
-            sock.setsockopt(socket.IPPROTO_IP, socket.IP_MULTICAST_TTL, TTL)
-            sock.sendto(SERVER_ADDR.encode(), (MCAST_GRP, MCAST_PORT))
-            sock.close()
-            time.sleep(0.5)
-        except Exception as e:
-            print(e)
-            pass
+def handle_1():
 
+    connection = pika.BlockingConnection(pika.ConnectionParameters("localhost"))
+    channel = connection.channel()
+
+    channel.queue_declare(queue="sensores")
+    
+    sensor = Sensor()
+    def callback(ch, method, properties, body):
+        # print(" [x] Received %r" % body)
+        sensor.ParseFromString(body)
+        print(sensor.id,sensor.tipo)
+        sensores_status[sensor.id] = copy.copy(sensor)
+
+    channel.basic_consume(
+        queue="sensores",
+        on_message_callback=callback,
+    )
+    print(" [*] Waiting for messages. To exit press CTRL+C")
+    channel.start_consuming()
+    
 
 def handle_client(conn: socket.socket, input: Input):
     if input.tipo_request == "get":
@@ -116,7 +121,7 @@ def handle_device(conn: socket.socket, id: str):
 
 def start_server():
     thread = threading.Thread(
-        target=handle_connections
+        target=handle_1
     )
     thread.start()
     server.listen()

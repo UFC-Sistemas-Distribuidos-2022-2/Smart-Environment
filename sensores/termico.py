@@ -1,11 +1,7 @@
-
-import struct
-import socket
 import time
-from proto.sensores_pb2 import Sensor, Input
-from constants import MCAST_GRP, MCAST_PORT
-from typing import Tuple
+from proto.sensores_pb2 import Sensor
 import random
+import pika
 
 
 def process_sensor(sensor: Sensor):
@@ -16,45 +12,32 @@ def process_sensor(sensor: Sensor):
     sensor.temperatura = min(max(22, sensor.temperatura + fator * ruido), 33)
 
 
-def get_server() -> Tuple[str, int]:
-    sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM, socket.IPPROTO_UDP)
-    sock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
-    sock.bind(('', MCAST_PORT))
-    mreq = struct.pack("4sl", socket.inet_aton(MCAST_GRP), socket.INADDR_ANY)
-    sock.setsockopt(socket.IPPROTO_IP, socket.IP_ADD_MEMBERSHIP, mreq)
-    data, _ = sock.recvfrom(1024)
-    sock.close()
-    data = data.decode()
-    host = data.split(":")[0]
-    port = int(data.split(":")[1])
-    return (host, port)
+temp = random.uniform(23, 30)
 
-
-temp_freezer = random.uniform(23, 30)
-temp_geladeira = random.uniform(1, 7)
 
 sensor = Sensor(
     tipo="termico",
-    nome="Geladeira Home",
+    nome="Home",
     id=str(random.randrange(5000)),
-    temperatura=temp_geladeira,
+    temperatura=temp,
 )
 
 
 def start_client():
-    host, port = get_server()
-    conn = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    conn.connect((host, port))
-    print(f"[STARTING] Client is conected to {host}:{port}")
-    start_input = Input(tipo="sensor", dest_id=sensor.id)
-    conn.sendall(start_input.SerializeToString())
-    time.sleep(1)
-    conn.sendall(sensor.SerializeToString())
+    connection = pika.BlockingConnection(pika.ConnectionParameters('localhost'))
+    channel = connection.channel()
+    # create a hello queue
+    channel.queue_declare(queue='sensores')
+    print(f"[STARTING] Client is conected")
 
     while True:
         process_sensor(sensor)
-        conn.sendall(sensor.SerializeToString())
-        time.sleep(10)
+
+        #conn.sendall(sensor.SerializeToString())
+        channel.basic_publish(exchange='',
+                      routing_key='sensores',
+                      body=sensor.SerializeToString())
+        time.sleep(5)
 
 
 if __name__ == "__main__":

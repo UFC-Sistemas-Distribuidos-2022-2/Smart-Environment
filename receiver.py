@@ -1,17 +1,21 @@
-#!/usr/bin/env python
 import pika
 
-connection = pika.BlockingConnection(pika.ConnectionParameters(host='localhost'))
+# establish a connection with RabbitMQ server
+connection = pika.BlockingConnection(pika.ConnectionParameters("localhost"))
 channel = connection.channel()
 
-channel.queue_declare(queue='hello')
+# make sure that the queue exists,
+# 為什麼always要declare queue, 可以確保queue一定存在
+channel.queue_declare(queue="hello")
+
 
 def callback(ch, method, properties, body):
     print(" [x] Received %r" % body)
 
-channel.basic_consume(callback,
-                      queue='hello',
-                      no_ack=True)
 
-print(' [*] Waiting for messages. To exit press CTRL+C')
+channel.basic_consume(
+    queue="hello",
+    on_message_callback=callback,
+)
+print(" [*] Waiting for messages. To exit press CTRL+C")
 channel.start_consuming()

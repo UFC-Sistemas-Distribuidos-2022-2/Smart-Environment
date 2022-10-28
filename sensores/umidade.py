@@ -5,16 +5,22 @@ import pika
 
 
 def process_sensor(sensor: Sensor):
-    sensor.presenca = bool(random.getrandbits(1))
+
+    ruido = random.random()/20
+    fator = random.randrange(-1, 2, 1)
+
+    sensor.temperatura = min(max(0.35, sensor.temperatura + fator * ruido), 0.65)
 
 
-temp = random.uniform(23, 30)
+umidade = random.uniform(0.5, 0.6)
 
 
 sensor = Sensor(
-    tipo="presenca", nome="PresencaX", id=str(random.randrange(5000)), presenca=False
+    tipo="umidade",
+    nome="Home",
+    id=str(random.randrange(5000)),
+    temperatura=umidade,
 )
-
 
 
 def start_client():
@@ -26,12 +32,12 @@ def start_client():
 
     while True:
         process_sensor(sensor)
-
+        print(sensor.temperatura)
         #conn.sendall(sensor.SerializeToString())
         channel.basic_publish(exchange='',
                       routing_key='sensores',
                       body=sensor.SerializeToString())
-        time.sleep(5)
+        time.sleep(20)
 
 
 if __name__ == "__main__":

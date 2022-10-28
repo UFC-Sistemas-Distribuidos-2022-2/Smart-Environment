@@ -26,6 +26,16 @@
         </ul>
         <img src="../static/termico.png" alt="geladeira icon" class="img-icon">
     </div>
+    {% elif sensor.tipo=='umidade' %}
+    <div class="div-template">
+        <p style="font-size: 24px">Sensor {{ sensor.tipo }}</p>
+        <ul>
+            <li>id={{ sensor.id }}</li>
+            <li>umidade={{ '{:.2f}'.format(sensor.temperatura*100) }}%</li>
+
+        </ul>
+        <img src="../static/termico.png" alt="geladeira icon" class="img-icon">
+    </div>
     {% elif sensor.tipo=='presenca' %}
     <div class="div-template">
         <p style="font-size: 24px">Sensor {{ sensor.tipo }}</p>
