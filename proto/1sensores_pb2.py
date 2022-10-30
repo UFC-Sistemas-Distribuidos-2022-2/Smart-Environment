@@ -2,330 +2,555 @@
 # source: sensores.proto
 
 import sys
-_b=sys.version_info[0]<3 and (lambda x:x) or (lambda x:x.encode('latin1'))
+
+_b = sys.version_info[0] < 3 and (lambda x: x) or (lambda x: x.encode("latin1"))
 from google.protobuf import descriptor as _descriptor
 from google.protobuf import message as _message
 from google.protobuf import reflection as _reflection
 from google.protobuf import symbol_database as _symbol_database
+
 # @@protoc_insertion_point(imports)
 
 _sym_db = _symbol_database.Default()
 
 
-
-
 DESCRIPTOR = _descriptor.FileDescriptor(
-  name='sensores.proto',
-  package='',
-  syntax='proto2',
-  serialized_options=None,
-  serialized_pb=_b('\n\x0esensores.proto\"t\n\x06Sensor\x12\x0c\n\x04tipo\x18\x01 \x02(\t\x12\n\n\x02id\x18\x02 \x02(\t\x12\x13\n\x0btemperatura\x18\x03 \x01(\x02\x12\x1b\n\x13temperatura_freezer\x18\x04 \x01(\x02\x12\x10\n\x08presenca\x18\x05 \x01(\x08\x12\x0c\n\x04nome\x18\x06 \x01(\t\"(\n\x0bSensor_List\x12\x19\n\x08sensores\x18\x01 \x03(\x0b\x32\x07.Sensor\"\'\n\x0b\x44\x65vice_List\x12\x18\n\x07\x64\x65vices\x18\x01 \x03(\x0b\x32\x07.Device\"r\n\x06\x44\x65vice\x12\x0c\n\x04tipo\x18\x01 \x02(\t\x12\n\n\x02id\x18\x02 \x02(\t\x12\x13\n\x0btemperatura\x18\x03 \x01(\x02\x12\x1b\n\x13temperatura_freezer\x18\x04 \x01(\x02\x12\x0e\n\x06ligado\x18\x05 \x01(\x08\x12\x0c\n\x04nome\x18\x06 \x01(\t\"x\n\x05Input\x12\x0c\n\x04tipo\x18\x01 \x02(\t\x12\x14\n\x0ctipo_request\x18\x02 \x01(\t\x12\x0f\n\x07\x64\x65st_id\x18\x03 \x01(\t\x12\x15\n\rtipo_desejado\x18\x04 \x01(\t\x12\x0e\n\x06ligado\x18\x05 \x01(\x08\x12\x13\n\x0btemperatura\x18\x06 \x01(\x02')
+    name="sensores.proto",
+    package="",
+    syntax="proto2",
+    serialized_options=None,
+    serialized_pb=_b(
+        '\n\x0esensores.proto"t\n\x06Sensor\x12\x0c\n\x04tipo\x18\x01 \x02(\t\x12\n\n\x02id\x18\x02 \x02(\t\x12\x13\n\x0btemperatura\x18\x03 \x01(\x02\x12\x1b\n\x13temperatura_freezer\x18\x04 \x01(\x02\x12\x10\n\x08presenca\x18\x05 \x01(\x08\x12\x0c\n\x04nome\x18\x06 \x01(\t"(\n\x0bSensor_List\x12\x19\n\x08sensores\x18\x01 \x03(\x0b\x32\x07.Sensor"\'\n\x0b\x44\x65vice_List\x12\x18\n\x07\x64\x65vices\x18\x01 \x03(\x0b\x32\x07.Device"r\n\x06\x44\x65vice\x12\x0c\n\x04tipo\x18\x01 \x02(\t\x12\n\n\x02id\x18\x02 \x02(\t\x12\x13\n\x0btemperatura\x18\x03 \x01(\x02\x12\x1b\n\x13temperatura_freezer\x18\x04 \x01(\x02\x12\x0e\n\x06ligado\x18\x05 \x01(\x08\x12\x0c\n\x04nome\x18\x06 \x01(\t"x\n\x05Input\x12\x0c\n\x04tipo\x18\x01 \x02(\t\x12\x14\n\x0ctipo_request\x18\x02 \x01(\t\x12\x0f\n\x07\x64\x65st_id\x18\x03 \x01(\t\x12\x15\n\rtipo_desejado\x18\x04 \x01(\t\x12\x0e\n\x06ligado\x18\x05 \x01(\x08\x12\x13\n\x0btemperatura\x18\x06 \x01(\x02'
+    ),
 )
 
 
-
-
 _SENSOR = _descriptor.Descriptor(
-  name='Sensor',
-  full_name='Sensor',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='tipo', full_name='Sensor.tipo', index=0,
-      number=1, type=9, cpp_type=9, label=2,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='id', full_name='Sensor.id', index=1,
-      number=2, type=9, cpp_type=9, label=2,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='temperatura', full_name='Sensor.temperatura', index=2,
-      number=3, type=2, cpp_type=6, label=1,
-      has_default_value=False, default_value=float(0),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='temperatura_freezer', full_name='Sensor.temperatura_freezer', index=3,
-      number=4, type=2, cpp_type=6, label=1,
-      has_default_value=False, default_value=float(0),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='presenca', full_name='Sensor.presenca', index=4,
-      number=5, type=8, cpp_type=7, label=1,
-      has_default_value=False, default_value=False,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='nome', full_name='Sensor.nome', index=5,
-      number=6, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto2',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=18,
-  serialized_end=134,
+    name="Sensor",
+    full_name="Sensor",
+    filename=None,
+    file=DESCRIPTOR,
+    containing_type=None,
+    fields=[
+        _descriptor.FieldDescriptor(
+            name="tipo",
+            full_name="Sensor.tipo",
+            index=0,
+            number=1,
+            type=9,
+            cpp_type=9,
+            label=2,
+            has_default_value=False,
+            default_value=_b("").decode("utf-8"),
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=None,
+            file=DESCRIPTOR,
+        ),
+        _descriptor.FieldDescriptor(
+            name="id",
+            full_name="Sensor.id",
+            index=1,
+            number=2,
+            type=9,
+            cpp_type=9,
+            label=2,
+            has_default_value=False,
+            default_value=_b("").decode("utf-8"),
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=None,
+            file=DESCRIPTOR,
+        ),
+        _descriptor.FieldDescriptor(
+            name="temperatura",
+            full_name="Sensor.temperatura",
+            index=2,
+            number=3,
+            type=2,
+            cpp_type=6,
+            label=1,
+            has_default_value=False,
+            default_value=float(0),
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=None,
+            file=DESCRIPTOR,
+        ),
+        _descriptor.FieldDescriptor(
+            name="temperatura_freezer",
+            full_name="Sensor.temperatura_freezer",
+            index=3,
+            number=4,
+            type=2,
+            cpp_type=6,
+            label=1,
+            has_default_value=False,
+            default_value=float(0),
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=None,
+            file=DESCRIPTOR,
+        ),
+        _descriptor.FieldDescriptor(
+            name="presenca",
+            full_name="Sensor.presenca",
+            index=4,
+            number=5,
+            type=8,
+            cpp_type=7,
+            label=1,
+            has_default_value=False,
+            default_value=False,
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=None,
+            file=DESCRIPTOR,
+        ),
+        _descriptor.FieldDescriptor(
+            name="nome",
+            full_name="Sensor.nome",
+            index=5,
+            number=6,
+            type=9,
+            cpp_type=9,
+            label=1,
+            has_default_value=False,
+            default_value=_b("").decode("utf-8"),
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=None,
+            file=DESCRIPTOR,
+        ),
+    ],
+    extensions=[],
+    nested_types=[],
+    enum_types=[],
+    serialized_options=None,
+    is_extendable=False,
+    syntax="proto2",
+    extension_ranges=[],
+    oneofs=[],
+    serialized_start=18,
+    serialized_end=134,
 )
 
 
 _SENSOR_LIST = _descriptor.Descriptor(
-  name='Sensor_List',
-  full_name='Sensor_List',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='sensores', full_name='Sensor_List.sensores', index=0,
-      number=1, type=11, cpp_type=10, label=3,
-      has_default_value=False, default_value=[],
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto2',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=136,
-  serialized_end=176,
+    name="Sensor_List",
+    full_name="Sensor_List",
+    filename=None,
+    file=DESCRIPTOR,
+    containing_type=None,
+    fields=[
+        _descriptor.FieldDescriptor(
+            name="sensores",
+            full_name="Sensor_List.sensores",
+            index=0,
+            number=1,
+            type=11,
+            cpp_type=10,
+            label=3,
+            has_default_value=False,
+            default_value=[],
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=None,
+            file=DESCRIPTOR,
+        ),
+    ],
+    extensions=[],
+    nested_types=[],
+    enum_types=[],
+    serialized_options=None,
+    is_extendable=False,
+    syntax="proto2",
+    extension_ranges=[],
+    oneofs=[],
+    serialized_start=136,
+    serialized_end=176,
 )
 
 
 _DEVICE_LIST = _descriptor.Descriptor(
-  name='Device_List',
-  full_name='Device_List',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='devices', full_name='Device_List.devices', index=0,
-      number=1, type=11, cpp_type=10, label=3,
-      has_default_value=False, default_value=[],
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto2',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=178,
-  serialized_end=217,
+    name="Device_List",
+    full_name="Device_List",
+    filename=None,
+    file=DESCRIPTOR,
+    containing_type=None,
+    fields=[
+        _descriptor.FieldDescriptor(
+            name="devices",
+            full_name="Device_List.devices",
+            index=0,
+            number=1,
+            type=11,
+            cpp_type=10,
+            label=3,
+            has_default_value=False,
+            default_value=[],
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=None,
+            file=DESCRIPTOR,
+        ),
+    ],
+    extensions=[],
+    nested_types=[],
+    enum_types=[],
+    serialized_options=None,
+    is_extendable=False,
+    syntax="proto2",
+    extension_ranges=[],
+    oneofs=[],
+    serialized_start=178,
+    serialized_end=217,
 )
 
 
 _DEVICE = _descriptor.Descriptor(
-  name='Device',
-  full_name='Device',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='tipo', full_name='Device.tipo', index=0,
-      number=1, type=9, cpp_type=9, label=2,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='id', full_name='Device.id', index=1,
-      number=2, type=9, cpp_type=9, label=2,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='temperatura', full_name='Device.temperatura', index=2,
-      number=3, type=2, cpp_type=6, label=1,
-      has_default_value=False, default_value=float(0),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='temperatura_freezer', full_name='Device.temperatura_freezer', index=3,
-      number=4, type=2, cpp_type=6, label=1,
-      has_default_value=False, default_value=float(0),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='ligado', full_name='Device.ligado', index=4,
-      number=5, type=8, cpp_type=7, label=1,
-      has_default_value=False, default_value=False,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='nome', full_name='Device.nome', index=5,
-      number=6, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto2',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=219,
-  serialized_end=333,
+    name="Device",
+    full_name="Device",
+    filename=None,
+    file=DESCRIPTOR,
+    containing_type=None,
+    fields=[
+        _descriptor.FieldDescriptor(
+            name="tipo",
+            full_name="Device.tipo",
+            index=0,
+            number=1,
+            type=9,
+            cpp_type=9,
+            label=2,
+            has_default_value=False,
+            default_value=_b("").decode("utf-8"),
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=None,
+            file=DESCRIPTOR,
+        ),
+        _descriptor.FieldDescriptor(
+            name="id",
+            full_name="Device.id",
+            index=1,
+            number=2,
+            type=9,
+            cpp_type=9,
+            label=2,
+            has_default_value=False,
+            default_value=_b("").decode("utf-8"),
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=None,
+            file=DESCRIPTOR,
+        ),
+        _descriptor.FieldDescriptor(
+            name="temperatura",
+            full_name="Device.temperatura",
+            index=2,
+            number=3,
+            type=2,
+            cpp_type=6,
+            label=1,
+            has_default_value=False,
+            default_value=float(0),
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=None,
+            file=DESCRIPTOR,
+        ),
+        _descriptor.FieldDescriptor(
+            name="temperatura_freezer",
+            full_name="Device.temperatura_freezer",
+            index=3,
+            number=4,
+            type=2,
+            cpp_type=6,
+            label=1,
+            has_default_value=False,
+            default_value=float(0),
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=None,
+            file=DESCRIPTOR,
+        ),
+        _descriptor.FieldDescriptor(
+            name="ligado",
+            full_name="Device.ligado",
+            index=4,
+            number=5,
+            type=8,
+            cpp_type=7,
+            label=1,
+            has_default_value=False,
+            default_value=False,
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=None,
+            file=DESCRIPTOR,
+        ),
+        _descriptor.FieldDescriptor(
+            name="nome",
+            full_name="Device.nome",
+            index=5,
+            number=6,
+            type=9,
+            cpp_type=9,
+            label=1,
+            has_default_value=False,
+            default_value=_b("").decode("utf-8"),
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=None,
+            file=DESCRIPTOR,
+        ),
+    ],
+    extensions=[],
+    nested_types=[],
+    enum_types=[],
+    serialized_options=None,
+    is_extendable=False,
+    syntax="proto2",
+    extension_ranges=[],
+    oneofs=[],
+    serialized_start=219,
+    serialized_end=333,
 )
 
 
 _INPUT = _descriptor.Descriptor(
-  name='Input',
-  full_name='Input',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='tipo', full_name='Input.tipo', index=0,
-      number=1, type=9, cpp_type=9, label=2,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='tipo_request', full_name='Input.tipo_request', index=1,
-      number=2, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='dest_id', full_name='Input.dest_id', index=2,
-      number=3, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='tipo_desejado', full_name='Input.tipo_desejado', index=3,
-      number=4, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='ligado', full_name='Input.ligado', index=4,
-      number=5, type=8, cpp_type=7, label=1,
-      has_default_value=False, default_value=False,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='temperatura', full_name='Input.temperatura', index=5,
-      number=6, type=2, cpp_type=6, label=1,
-      has_default_value=False, default_value=float(0),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto2',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=335,
-  serialized_end=455,
+    name="Input",
+    full_name="Input",
+    filename=None,
+    file=DESCRIPTOR,
+    containing_type=None,
+    fields=[
+        _descriptor.FieldDescriptor(
+            name="tipo",
+            full_name="Input.tipo",
+            index=0,
+            number=1,
+            type=9,
+            cpp_type=9,
+            label=2,
+            has_default_value=False,
+            default_value=_b("").decode("utf-8"),
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=None,
+            file=DESCRIPTOR,
+        ),
+        _descriptor.FieldDescriptor(
+            name="tipo_request",
+            full_name="Input.tipo_request",
+            index=1,
+            number=2,
+            type=9,
+            cpp_type=9,
+            label=1,
+            has_default_value=False,
+            default_value=_b("").decode("utf-8"),
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=None,
+            file=DESCRIPTOR,
+        ),
+        _descriptor.FieldDescriptor(
+            name="dest_id",
+            full_name="Input.dest_id",
+            index=2,
+            number=3,
+            type=9,
+            cpp_type=9,
+            label=1,
+            has_default_value=False,
+            default_value=_b("").decode("utf-8"),
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=None,
+            file=DESCRIPTOR,
+        ),
+        _descriptor.FieldDescriptor(
+            name="tipo_desejado",
+            full_name="Input.tipo_desejado",
+            index=3,
+            number=4,
+            type=9,
+            cpp_type=9,
+            label=1,
+            has_default_value=False,
+            default_value=_b("").decode("utf-8"),
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=None,
+            file=DESCRIPTOR,
+        ),
+        _descriptor.FieldDescriptor(
+            name="ligado",
+            full_name="Input.ligado",
+            index=4,
+            number=5,
+            type=8,
+            cpp_type=7,
+            label=1,
+            has_default_value=False,
+            default_value=False,
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=None,
+            file=DESCRIPTOR,
+        ),
+        _descriptor.FieldDescriptor(
+            name="temperatura",
+            full_name="Input.temperatura",
+            index=5,
+            number=6,
+            type=2,
+            cpp_type=6,
+            label=1,
+            has_default_value=False,
+            default_value=float(0),
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=None,
+            file=DESCRIPTOR,
+        ),
+    ],
+    extensions=[],
+    nested_types=[],
+    enum_types=[],
+    serialized_options=None,
+    is_extendable=False,
+    syntax="proto2",
+    extension_ranges=[],
+    oneofs=[],
+    serialized_start=335,
+    serialized_end=455,
 )
 
-_SENSOR_LIST.fields_by_name['sensores'].message_type = _SENSOR
-_DEVICE_LIST.fields_by_name['devices'].message_type = _DEVICE
-DESCRIPTOR.message_types_by_name['Sensor'] = _SENSOR
-DESCRIPTOR.message_types_by_name['Sensor_List'] = _SENSOR_LIST
-DESCRIPTOR.message_types_by_name['Device_List'] = _DEVICE_LIST
-DESCRIPTOR.message_types_by_name['Device'] = _DEVICE
-DESCRIPTOR.message_types_by_name['Input'] = _INPUT
+_SENSOR_LIST.fields_by_name["sensores"].message_type = _SENSOR
+_DEVICE_LIST.fields_by_name["devices"].message_type = _DEVICE
+DESCRIPTOR.message_types_by_name["Sensor"] = _SENSOR
+DESCRIPTOR.message_types_by_name["Sensor_List"] = _SENSOR_LIST
+DESCRIPTOR.message_types_by_name["Device_List"] = _DEVICE_LIST
+DESCRIPTOR.message_types_by_name["Device"] = _DEVICE
+DESCRIPTOR.message_types_by_name["Input"] = _INPUT
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
-Sensor = _reflection.GeneratedProtocolMessageType('Sensor', (_message.Message,), dict(
-  DESCRIPTOR = _SENSOR,
-  __module__ = 'sensores_pb2'
-  # @@protoc_insertion_point(class_scope:Sensor)
-  ))
+Sensor = _reflection.GeneratedProtocolMessageType(
+    "Sensor",
+    (_message.Message,),
+    dict(
+        DESCRIPTOR=_SENSOR,
+        __module__="sensores_pb2"
+        # @@protoc_insertion_point(class_scope:Sensor)
+    ),
+)
 _sym_db.RegisterMessage(Sensor)
 
-Sensor_List = _reflection.GeneratedProtocolMessageType('Sensor_List', (_message.Message,), dict(
-  DESCRIPTOR = _SENSOR_LIST,
-  __module__ = 'sensores_pb2'
-  # @@protoc_insertion_point(class_scope:Sensor_List)
-  ))
+Sensor_List = _reflection.GeneratedProtocolMessageType(
+    "Sensor_List",
+    (_message.Message,),
+    dict(
+        DESCRIPTOR=_SENSOR_LIST,
+        __module__="sensores_pb2"
+        # @@protoc_insertion_point(class_scope:Sensor_List)
+    ),
+)
 _sym_db.RegisterMessage(Sensor_List)
 
-Device_List = _reflection.GeneratedProtocolMessageType('Device_List', (_message.Message,), dict(
-  DESCRIPTOR = _DEVICE_LIST,
-  __module__ = 'sensores_pb2'
-  # @@protoc_insertion_point(class_scope:Device_List)
-  ))
+Device_List = _reflection.GeneratedProtocolMessageType(
+    "Device_List",
+    (_message.Message,),
+    dict(
+        DESCRIPTOR=_DEVICE_LIST,
+        __module__="sensores_pb2"
+        # @@protoc_insertion_point(class_scope:Device_List)
+    ),
+)
 _sym_db.RegisterMessage(Device_List)
 
-Device = _reflection.GeneratedProtocolMessageType('Device', (_message.Message,), dict(
-  DESCRIPTOR = _DEVICE,
-  __module__ = 'sensores_pb2'
-  # @@protoc_insertion_point(class_scope:Device)
-  ))
+Device = _reflection.GeneratedProtocolMessageType(
+    "Device",
+    (_message.Message,),
+    dict(
+        DESCRIPTOR=_DEVICE,
+        __module__="sensores_pb2"
+        # @@protoc_insertion_point(class_scope:Device)
+    ),
+)
 _sym_db.RegisterMessage(Device)
 
-Input = _reflection.GeneratedProtocolMessageType('Input', (_message.Message,), dict(
-  DESCRIPTOR = _INPUT,
-  __module__ = 'sensores_pb2'
-  # @@protoc_insertion_point(class_scope:Input)
-  ))
+Input = _reflection.GeneratedProtocolMessageType(
+    "Input",
+    (_message.Message,),
+    dict(
+        DESCRIPTOR=_INPUT,
+        __module__="sensores_pb2"
+        # @@protoc_insertion_point(class_scope:Input)
+    ),
+)
 _sym_db.RegisterMessage(Input)
 
 

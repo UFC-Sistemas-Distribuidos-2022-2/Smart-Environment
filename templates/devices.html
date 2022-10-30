@@ -60,6 +60,21 @@
             <img src="../static/ar-condicionado-off.png" alt="lampada icon" class="img-icon">
             {% endif %}
         </div>
+        {% elif device.tipo=='umidificador' %}
+        <a href="/devices/{{device.tipo}}/{{device.id}}" style="color: inherit;text-decoration: none;">
+            <div class="div-template">
+                <p style="font-size: 24px">Device {{ device.tipo }}</p>
+                <ul>
+                    <li>id={{ device.id }}</li>
+                    <li>nome={{ device.nome }}</li>
+                    <li>Status umidificador ={{ "Ligado" if device.ligado else "Desligado" }}</li>
+                </ul>
+                {% if device.ligado %}
+                <img src="../static/umidificador-on.png" alt="lampada icon" class="img-icon">
+                {% else %}
+                <img src="../static/umidificador-off.png" alt="lampada icon" class="img-icon">
+                {% endif %}
+            </div>
         {% elif device.tipo=='tv' %}
         <a href="/devices/{{device.tipo}}/{{device.id}}" style="color: inherit;text-decoration: none;">
             <div class="div-template">

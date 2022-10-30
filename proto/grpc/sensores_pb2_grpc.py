@@ -15,15 +15,15 @@ class RouteDeviceStub(object):
             channel: A grpc.Channel.
         """
         self.GetDevice = channel.unary_unary(
-                '/RouteDevice/GetDevice',
-                request_serializer=proto_dot_sensores__pb2.Input.SerializeToString,
-                response_deserializer=proto_dot_sensores__pb2.Device.FromString,
-                )
+            "/RouteDevice/GetDevice",
+            request_serializer=proto_dot_sensores__pb2.Input.SerializeToString,
+            response_deserializer=proto_dot_sensores__pb2.Device.FromString,
+        )
         self.UpdateDevice = channel.unary_unary(
-                '/RouteDevice/UpdateDevice',
-                request_serializer=proto_dot_sensores__pb2.Input.SerializeToString,
-                response_deserializer=proto_dot_sensores__pb2.Device.FromString,
-                )
+            "/RouteDevice/UpdateDevice",
+            request_serializer=proto_dot_sensores__pb2.Input.SerializeToString,
+            response_deserializer=proto_dot_sensores__pb2.Device.FromString,
+        )
 
 
 class RouteDeviceServicer(object):
@@ -32,68 +32,93 @@ class RouteDeviceServicer(object):
     def GetDevice(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
+        context.set_details("Method not implemented!")
+        raise NotImplementedError("Method not implemented!")
 
     def UpdateDevice(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
+        context.set_details("Method not implemented!")
+        raise NotImplementedError("Method not implemented!")
 
 
 def add_RouteDeviceServicer_to_server(servicer, server):
     rpc_method_handlers = {
-            'GetDevice': grpc.unary_unary_rpc_method_handler(
-                    servicer.GetDevice,
-                    request_deserializer=proto_dot_sensores__pb2.Input.FromString,
-                    response_serializer=proto_dot_sensores__pb2.Device.SerializeToString,
-            ),
-            'UpdateDevice': grpc.unary_unary_rpc_method_handler(
-                    servicer.UpdateDevice,
-                    request_deserializer=proto_dot_sensores__pb2.Input.FromString,
-                    response_serializer=proto_dot_sensores__pb2.Device.SerializeToString,
-            ),
+        "GetDevice": grpc.unary_unary_rpc_method_handler(
+            servicer.GetDevice,
+            request_deserializer=proto_dot_sensores__pb2.Input.FromString,
+            response_serializer=proto_dot_sensores__pb2.Device.SerializeToString,
+        ),
+        "UpdateDevice": grpc.unary_unary_rpc_method_handler(
+            servicer.UpdateDevice,
+            request_deserializer=proto_dot_sensores__pb2.Input.FromString,
+            response_serializer=proto_dot_sensores__pb2.Device.SerializeToString,
+        ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
-            'RouteDevice', rpc_method_handlers)
+        "RouteDevice", rpc_method_handlers
+    )
     server.add_generic_rpc_handlers((generic_handler,))
 
 
- # This class is part of an EXPERIMENTAL API.
+# This class is part of an EXPERIMENTAL API.
 class RouteDevice(object):
     """Missing associated documentation comment in .proto file."""
 
     @staticmethod
-    def GetDevice(request,
+    def GetDevice(
+        request,
+        target,
+        options=(),
+        channel_credentials=None,
+        call_credentials=None,
+        insecure=False,
+        compression=None,
+        wait_for_ready=None,
+        timeout=None,
+        metadata=None,
+    ):
+        return grpc.experimental.unary_unary(
+            request,
             target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/RouteDevice/GetDevice',
+            "/RouteDevice/GetDevice",
             proto_dot_sensores__pb2.Input.SerializeToString,
             proto_dot_sensores__pb2.Device.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+        )
 
     @staticmethod
-    def UpdateDevice(request,
+    def UpdateDevice(
+        request,
+        target,
+        options=(),
+        channel_credentials=None,
+        call_credentials=None,
+        insecure=False,
+        compression=None,
+        wait_for_ready=None,
+        timeout=None,
+        metadata=None,
+    ):
+        return grpc.experimental.unary_unary(
+            request,
             target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/RouteDevice/UpdateDevice',
+            "/RouteDevice/UpdateDevice",
             proto_dot_sensores__pb2.Input.SerializeToString,
             proto_dot_sensores__pb2.Device.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+        )

@@ -16,21 +16,20 @@ sensor = Sensor(
 )
 
 
-
 def start_client():
-    connection = pika.BlockingConnection(pika.ConnectionParameters('localhost'))
+    connection = pika.BlockingConnection(pika.ConnectionParameters("localhost"))
     channel = connection.channel()
     # create a hello queue
-    channel.queue_declare(queue='sensores')
+    channel.queue_declare(queue="sensores")
     print(f"[STARTING] Client is conected")
 
     while True:
         process_sensor(sensor)
 
-        #conn.sendall(sensor.SerializeToString())
-        channel.basic_publish(exchange='',
-                      routing_key='sensores',
-                      body=sensor.SerializeToString())
+        # conn.sendall(sensor.SerializeToString())
+        channel.basic_publish(
+            exchange="", routing_key="sensores", body=sensor.SerializeToString()
+        )
         time.sleep(5)
 
 

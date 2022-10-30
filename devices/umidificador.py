@@ -1,3 +1,37 @@
+""" import socket
+import time
+import random
+from proto.sensores_pb2 import Device
+
+
+device = Device(
+    tipo="ar_condicionado",
+    nome="brastemp-4000",
+    id=str(random.randrange(500)),
+    temperatura=18,
+    ligado=False
+)
+
+
+def start_client():
+    conn = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+
+
+
+    time.sleep(1)
+    conn.sendall(device.SerializeToString())
+
+    while True:
+        data = conn.recv(2048)
+        input = Input()
+        input.ParseFromString(data)      
+        if input.tipo_request == "post":
+            device.temperatura = max(input.temperatura, 16)
+            device.ligado = input.ligado
+        conn.sendall(device.SerializeToString())
+ """
+
+
 # Copyright 2015 gRPC authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -19,7 +53,9 @@ import grpc
 from proto.grpc import sensores_pb2
 from proto.grpc import sensores_pb2_grpc
 
-device = sensores_pb2.Device(tipo="lampada", nome="led-100", id="2", ligado=False)
+device = sensores_pb2.Device(
+    tipo="umidificador", nome="umidificador00", id="5", temperatura=0, ligado=False
+)
 
 
 class ArCondicionado(sensores_pb2_grpc.RouteDeviceServicer):
@@ -28,11 +64,13 @@ class ArCondicionado(sensores_pb2_grpc.RouteDeviceServicer):
 
     def UpdateDevice(self, request, context):
         device.ligado = request.ligado
+        if device.ligado:
+            device.temperatura = request.temperatura
         return device
 
 
 def serve():
-    port = "50052"
+    port = "50053"
     server = grpc.server(futures.ThreadPoolExecutor(max_workers=10))
     sensores_pb2_grpc.add_RouteDeviceServicer_to_server(ArCondicionado(), server)
     server.add_insecure_port("[::]:" + port)

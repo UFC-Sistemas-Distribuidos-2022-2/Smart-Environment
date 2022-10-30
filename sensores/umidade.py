@@ -1,12 +1,12 @@
 import time
-from proto.sensores_pb2 import Sensor
+from proto.grpc.sensores_pb2 import Sensor
 import random
 import pika
 
 
 def process_sensor(sensor: Sensor):
 
-    ruido = random.random()/20
+    ruido = random.random() / 20
     fator = random.randrange(-1, 2, 1)
 
     sensor.temperatura = min(max(0.35, sensor.temperatura + fator * ruido), 0.65)
@@ -24,19 +24,19 @@ sensor = Sensor(
 
 
 def start_client():
-    connection = pika.BlockingConnection(pika.ConnectionParameters('localhost'))
+    connection = pika.BlockingConnection(pika.ConnectionParameters("localhost"))
     channel = connection.channel()
     # create a hello queue
-    channel.queue_declare(queue='sensores')
+    channel.queue_declare(queue="sensores")
     print(f"[STARTING] Client is conected")
 
     while True:
         process_sensor(sensor)
         print(sensor.temperatura)
-        #conn.sendall(sensor.SerializeToString())
-        channel.basic_publish(exchange='',
-                      routing_key='sensores',
-                      body=sensor.SerializeToString())
+        # conn.sendall(sensor.SerializeToString())
+        channel.basic_publish(
+            exchange="", routing_key="sensores", body=sensor.SerializeToString()
+        )
         time.sleep(20)
 
 

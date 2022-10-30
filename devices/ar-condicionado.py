@@ -53,13 +53,15 @@ import grpc
 from proto.grpc import sensores_pb2
 from proto.grpc import sensores_pb2_grpc
 
-device = sensores_pb2.Device(tipo='ar_condicionado', nome='brastemp-4000', id='1', temperatura=18, ligado=False)
+device = sensores_pb2.Device(
+    tipo="ar_condicionado", nome="brastemp-4000", id="1", temperatura=18, ligado=False
+)
+
 
 class ArCondicionado(sensores_pb2_grpc.RouteDeviceServicer):
-
     def GetDevice(self, request, context):
         return device
-    
+
     def UpdateDevice(self, request, context):
         device.ligado = request.ligado
         if device.ligado:
@@ -68,10 +70,10 @@ class ArCondicionado(sensores_pb2_grpc.RouteDeviceServicer):
 
 
 def serve():
-    port = '50051'
+    port = "50051"
     server = grpc.server(futures.ThreadPoolExecutor(max_workers=10))
     sensores_pb2_grpc.add_RouteDeviceServicer_to_server(ArCondicionado(), server)
-    server.add_insecure_port('[::]:' + port)
+    server.add_insecure_port("[::]:" + port)
     server.start()
     print("Server started, listening on " + port)
     server.wait_for_termination()

@@ -1,4 +1,4 @@
 HOST = "localhost"
-PORT = 1532
-MCAST_GRP = '224.0.0.1'
+PORT = 1531
+MCAST_GRP = "224.0.0.1"
 MCAST_PORT = 6890

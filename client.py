@@ -8,7 +8,6 @@ from constants import PORT, HOST
 app = Flask(__name__)
 
 
-
 def get_sensores() -> List[Sensor]:
     conn = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     conn.connect((HOST, PORT))
@@ -62,19 +61,19 @@ def lampada(tipo, id):
     return render_template("update.html", tipo=tipo, id=id)
 
 
-@app.route("/update/<tipo>/<id>", methods=['GET', 'POST'])
+@app.route("/update/<tipo>/<id>", methods=["GET", "POST"])
 def update(tipo, id):
     input = Input()
-    if tipo in ["ar_condicionado","tv"] and request.form.get('device_value') is not '':
-        input.temperatura = float(request.form.get('device_value'))
-    print(request.form.get('ligado'))
-    input.ligado = bool(int(request.form.get('ligado')))
+    if tipo in ["ar_condicionado", "tv"] and request.form.get("device_value") is not "":
+        input.temperatura = float(request.form.get("device_value"))
+    print(request.form.get("ligado"))
+    input.ligado = bool(int(request.form.get("ligado")))
     print(input.ligado)
     input.dest_id = str(int(id))
     input.tipo = "client"
-    input.tipo_request = 'post'
+    input.tipo_request = "post"
     update_device(input)
-    return redirect('/devices')
+    return redirect("/devices")
 
 
 if __name__ == "__main__":
