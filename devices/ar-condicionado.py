@@ -65,7 +65,7 @@ class ArCondicionado(sensores_pb2_grpc.RouteDeviceServicer):
     def UpdateDevice(self, request, context):
         device.ligado = request.ligado
         if device.ligado:
-            device.temperatura = request.temperatura
+            device.temperatura = max(16, request.temperatura)
         return device
 
 

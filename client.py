@@ -3,6 +3,7 @@ from typing import List
 import socket
 from proto.grpc.sensores_pb2 import Sensor, Input, Sensor_List, Device, Device_List
 from constants import PORT, HOST
+import time
 
 
 app = Flask(__name__)
@@ -27,7 +28,6 @@ def get_devices() -> List[Device]:
     data = conn.recv(2048)
     devices_list = Device_List()
     devices_list.ParseFromString(data)
-    print(devices_list)
     return devices_list
 
 
@@ -35,7 +35,7 @@ def update_device(input: Input) -> None:
     conn = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     conn.connect((HOST, PORT))
     conn.sendall(input.SerializeToString())
-
+    conn.recv(2048)
 
 @app.route("/")
 def index():
@@ -45,7 +45,6 @@ def index():
 @app.route("/sensores/")
 def sensores():
     sensores = get_sensores()
-    print(len(sensores.sensores))
 
     return render_template("sensors.html", sensores=sensores.sensores)
 
@@ -66,9 +65,7 @@ def update(tipo, id):
     input = Input()
     if tipo in ["ar_condicionado", "tv"] and request.form.get("device_value") is not "":
         input.temperatura = float(request.form.get("device_value"))
-    print(request.form.get("ligado"))
     input.ligado = bool(int(request.form.get("ligado")))
-    print(input.ligado)
     input.dest_id = str(int(id))
     input.tipo = "client"
     input.tipo_request = "post"

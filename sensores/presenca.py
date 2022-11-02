@@ -1,5 +1,5 @@
 import time
-from proto.sensores_pb2 import Sensor
+from proto.grpc.sensores_pb2 import Sensor
 import random
 import pika
 
